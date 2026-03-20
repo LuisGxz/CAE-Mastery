@@ -1,0 +1,53 @@
+{
+  "scores": {
+    "reading": [
+      {
+        "week": 0,
+        "score": 186,
+        "date": "23/3/2026"
+      }
+    ],
+    "uoe": [
+      {
+        "week": 0,
+        "score": 151,
+        "date": "23/3/2026"
+      }
+    ],
+    "writing": [
+      {
+        "week": 0,
+        "score": 161,
+        "date": "23/3/2026"
+      }
+    ],
+    "listening": [
+      {
+        "week": 0,
+        "score": 165,
+        "date": "23/3/2026"
+      }
+    ],
+    "speaking": [
+      {
+        "week": 0,
+        "score": 151,
+        "date": "23/3/2026"
+      }
+    ]
+  },
+  "dailyChecks": {
+    "1-Lunes-SR: Tarjetas pendientes (10 min)": false,
+    "1-Miércoles-Writing: CAE Essay cronometrado — \"work & career\" (45 min)": false,
+    "1-Lunes-UoE: Word Formation: sufijos nominales (-tion/-ment/-ness/-ity/-ance) — 20 ejercicios (40 min)": false
+  },
+  "errors": [],
+  "diary": [],
+  "srCards": [],
+  "currentWeek": 1,
+  "shadowLog": [],
+  "outputLog": [],
+  "readingLog": [],
+  "totalMinutes": 0,
+  "dismissedReminders": []
+}

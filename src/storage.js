@@ -1,8 +1,29 @@
 // ─── storage.js ───────────────────────────────────────────────────────────────
-// Persistent storage using File System Access API (real file on disk).
-// Falls back to localStorage if the API is unsupported or not yet configured.
-// The file handle is persisted in IndexedDB between sessions.
+// Storage hierarchy:
+//   1. Electron (Node.js fs via IPC)  → automático, sin config, mejor opción
+//   2. File System Access API         → archivo real en disco (Chrome/Edge)
+//   3. localStorage                   → fallback universal
 // ──────────────────────────────────────────────────────────────────────────────
+
+// ─── Electron (Node.js fs) ────────────────────────────────────────────────────
+
+export const isElectron = () => typeof window !== 'undefined' && !!window.electronAPI
+
+export async function loadStateElectron(defaultState) {
+  try {
+    const data = await window.electronAPI.loadData()
+    if (data) return { ...defaultState, ...data }
+  } catch { /* silent */ }
+  return null
+}
+
+export async function saveStateElectron(state) {
+  try { await window.electronAPI.saveData(state) } catch { /* silent */ }
+}
+
+export async function getElectronDataPath() {
+  try { return await window.electronAPI.getDataPath() } catch { return null }
+}
 
 const IDB_NAME = 'cae-mastery-idb';
 const IDB_STORE = 'config';

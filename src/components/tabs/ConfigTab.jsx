@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { SKILLS, EXAM_DATE } from '../../data';
 import {
   exportData,
@@ -7,12 +7,14 @@ import {
   requestFilePermission,
   disconnectFileStorage,
   isFileAPISupported,
+  getElectronDataPath,
 } from '../../storage';
 
 const STATUS_INFO = {
+  electron:        { color: "#22c55e", icon: "🖥️", label: "App de escritorio — guardado automatico en AppData" },
   checking:        { color: "#64748b", icon: "⏳", label: "Verificando..." },
   ready:           { color: "#22c55e", icon: "✅", label: "Archivo en disco activo" },
-  needs_permission:{ color: "#f59e0b", icon: "⚠️", label: "Necesita reconectar (sesión nueva)" },
+  needs_permission:{ color: "#f59e0b", icon: "⚠️", label: "Necesita reconectar (sesion nueva)" },
   not_configured:  { color: "#94a3b8", icon: "📁", label: "No configurado — usando localStorage" },
   unsupported:     { color: "#ef4444", icon: "❌", label: "No soportado en este navegador (usa Chrome/Edge)" },
   denied:          { color: "#ef4444", icon: "🚫", label: "Permiso denegado" },
@@ -20,6 +22,13 @@ const STATUS_INFO = {
 
 export default function ConfigTab({ state, setState, fileStatus, setFileStatus, defaultState, daysLeft }) {
   const fileRef = useRef(null);
+  const [dataPath, setDataPath] = useState(null);
+
+  useEffect(() => {
+    if (fileStatus === 'electron') {
+      getElectronDataPath().then(p => setDataPath(p));
+    }
+  }, [fileStatus]);
 
   const handleImport = async (e) => {
     const file = e.target.files?.[0];
@@ -76,6 +85,18 @@ export default function ConfigTab({ state, setState, fileStatus, setFileStatus, 
           <span style={{ fontSize: 13, color: info.color }}>{info.label}</span>
         </div>
 
+        {fileStatus === 'electron' && (
+          <div>
+            <p style={{ fontSize: 12, color: "#94a3b8", marginBottom: 4 }}>
+              Los datos se guardan automaticamente. No necesitas configurar nada.
+            </p>
+            {dataPath && (
+              <p style={{ fontSize: 11, color: "#64748b", fontFamily: "monospace", wordBreak: "break-all" }}>
+                📂 {dataPath}
+              </p>
+            )}
+          </div>
+        )}
         {fileStatus === 'not_configured' && isFileAPISupported() && (
           <div>
             <p style={{ fontSize: 12, color: "#94a3b8", marginBottom: 10 }}>

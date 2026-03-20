@@ -1,9 +1,9 @@
-' CAE Mastery — launcher silencioso
-' Arranca npm run dev sin mostrar ninguna ventana CMD.
-' Vite abre el navegador automáticamente (server.open = true en vite.config.js).
-' Si el servidor ya está corriendo en el puerto 5173, este script falla
-' silenciosamente y el navegador que ya tenías abierto sigue funcionando.
+' CAE Mastery — launcher de escritorio
+' Primero hace el build de la app y luego abre Electron como ventana nativa.
+' Sin CMD visible, sin navegador — ventana propia como cualquier app.
 
-Set WshShell = WScript.CreateObject("WScript.Shell")
+Dim objShell
+Set objShell = WScript.CreateObject("WScript.Shell")
 
-WshShell.Run "cmd /c cd /d ""C:\Aprendizaje\Ingles\cae-mastery"" && npm run dev", 0, False
+' npm run app = vite build && electron .
+objShell.Run "cmd /c cd /d ""C:\Aprendizaje\Ingles\cae-mastery"" && npm run app", 0, False

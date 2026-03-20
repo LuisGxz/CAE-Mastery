@@ -1,6 +1,9 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { defaultState } from '../data';
 import {
+  isElectron,
+  loadStateElectron,
+  saveStateElectron,
   loadStateSync,
   loadStateFromFile,
   saveState,
@@ -11,30 +14,42 @@ export function useAppState() {
   // Sync load from localStorage for instant boot — no flicker
   const [state, setState] = useState(() => loadStateSync(defaultState()));
 
-  // 'checking' | 'ready' | 'needs_permission' | 'not_configured' | 'unsupported'
+  // 'electron' | 'ready' | 'needs_permission' | 'not_configured' | 'unsupported' | 'checking'
   const [fileStatus, setFileStatus] = useState('checking');
 
   const saveRef = useRef(null);
 
-  // On mount: check file storage status and try to load from file if ready
+  // On mount: detect environment and load persisted data
   useEffect(() => {
     async function init() {
-      const status = await getStorageStatus();
-      setFileStatus(status);
-      if (status === 'ready') {
-        const fileState = await loadStateFromFile(defaultState());
-        if (fileState) setState(fileState);
+      if (isElectron()) {
+        // Best case: Electron — loads from AppData via Node.js fs
+        const data = await loadStateElectron(defaultState());
+        if (data) setState(data);
+        setFileStatus('electron');
+      } else {
+        // Browser: try File System Access API, fall back to localStorage
+        const status = await getStorageStatus();
+        setFileStatus(status);
+        if (status === 'ready') {
+          const fileState = await loadStateFromFile(defaultState());
+          if (fileState) setState(fileState);
+        }
       }
     }
     init();
   }, []);
 
-  // Debounced auto-save (500ms) — writes to localStorage + file if configured
+  // Debounced auto-save (500ms)
   useEffect(() => {
     if (fileStatus === 'checking') return;
     if (saveRef.current) clearTimeout(saveRef.current);
     saveRef.current = setTimeout(() => {
-      saveState(state, fileStatus);
+      if (fileStatus === 'electron') {
+        saveStateElectron(state);
+      } else {
+        saveState(state, fileStatus);
+      }
     }, 500);
     return () => clearTimeout(saveRef.current);
   }, [state, fileStatus]);
