@@ -6,7 +6,7 @@ export const SKILLS = [
   { key: "speaking", label: "Speaking", current: 151, c1: 180, c2: 200, color: "#a855f7" },
 ];
 
-export const TABS = ["Home", "Plan", "Tracker", "Errores", "Diario", "SR", "Shadow", "Output", "Config"];
+export const TABS = ["Home", "Plan", "Tracker", "Errores", "Diario", "Lectura", "SR", "Shadow", "Output", "Config"];
 
 export const CAT_COLORS = { uoe: "#ef4444", speaking: "#a855f7", writing: "#f59e0b", listening: "#3b82f6", reading: "#22c55e", sr: "#06b6d4", review: "#64748b" };
 
@@ -60,6 +60,7 @@ export function defaultState() {
     currentWeek: 1,
     shadowLog: [],
     outputLog: [],
+    readingLog: [],
     totalMinutes: 0,
     dismissedReminders: [],
   };
