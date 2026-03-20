@@ -66,6 +66,20 @@ export default function PlanTab({ state, up }) {
                   <div style={{ fontSize: 10, color: "#64748b", marginTop: 2, marginLeft: 12, fontStyle: "italic" }}>
                     💡 {task.technique}
                   </div>
+                  {task.steps?.length > 0 && (
+                    <div style={{ marginLeft: 12, marginTop: 6 }}>
+                      {task.steps.map((step, si) => (
+                        <div key={si} style={{ fontSize: 11, color: "#94a3b8", marginTop: 3, paddingLeft: 8, borderLeft: "2px solid rgba(255,255,255,0.08)", lineHeight: 1.4 }}>
+                          → {step}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {task.resource && (
+                    <div style={{ marginLeft: 12, marginTop: 6, fontSize: 10, color: "#06b6d4", background: "rgba(6,182,212,0.07)", borderRadius: 6, padding: "5px 8px", lineHeight: 1.5, wordBreak: "break-word" }}>
+                      {task.resource}
+                    </div>
+                  )}
                 </div>
               </div>
             );
