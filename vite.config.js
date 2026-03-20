@@ -31,4 +31,9 @@ export default defineConfig({
       }
     })
   ],
+  server: {
+    open: true,       // abre el navegador automáticamente al arrancar
+    strictPort: true, // si el puerto 5173 ya está ocupado, falla en lugar de cambiar
+    port: 5173,
+  },
 })
