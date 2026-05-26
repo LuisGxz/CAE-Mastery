@@ -12,13 +12,12 @@ function createWindow() {
     minWidth:  800,
     minHeight: 600,
     title: 'CAE Mastery',
+    backgroundColor: '#0f172a',   // evita flash blanco al abrir
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration:  false,
       contextIsolation: true,
     },
-    // Quita el frame nativo en mac; en Windows lo dejamos para el botón de cerrar
-    // backgroundColor: '#0f172a',  // evita flash blanco al abrir
   })
 
   // En producción carga el build estático; en dev carga el servidor Vite

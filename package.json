@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "app": "npm run build && electron .",
-    "package": "npm run build && electron-builder"
+    "package": "cross-env CSC_IDENTITY_AUTO_DISCOVERY=false npm run build && electron-builder"
   },
   "build": {
     "appId": "com.caemastery.app",
@@ -24,7 +24,8 @@
     ],
     "win": {
       "target": "portable",
-      "icon": "public/favicon.svg"
+      "forceCodeSigning": false,
+      "signAndEditExecutable": false
     }
   },
   "dependencies": {

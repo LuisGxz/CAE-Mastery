@@ -3,7 +3,20 @@
     "allow": [
       "Bash(powershell -ExecutionPolicy Bypass -File \"C:\\\\Aprendizaje\\\\Ingles\\\\cae-mastery\\\\create-shortcut.ps1\")",
       "Bash(npm install:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(grep -r winCodeSign C:/Aprendizaje/Ingles/cae-mastery/node_modules/electron-builder/out/ --include=*.js -l)",
+      "Bash(grep -r winCodeSign C:/Aprendizaje/Ingles/cae-mastery/node_modules/app-builder-lib/out/ --include=*.js -l)",
+      "Bash(\"C:/Aprendizaje/Ingles/cae-mastery/node_modules/app-builder-bin/win/x64/app-builder.exe\" download-artifact:*)",
+      "Bash(cp \"C:/Aprendizaje/Ingles/cae-mastery/release/CAE Mastery 1.0.0.exe\" \"C:/Users/Luis-/Desktop/CAE Mastery.exe\")",
+      "Read(//c/Users/Luis-/Desktop/**)",
+      "Bash(where python:*)",
+      "Bash(where python3:*)",
+      "Bash(where py:*)",
+      "Bash(python \"C:/Aprendizaje/Ingles/cae-mastery/create-icon.py\")",
+      "Bash(python create-icon.py)",
+      "Bash(find C:/Aprendizaje/Ingles/cae-mastery/node_modules/electron/ -name *.ico)",
+      "Bash(git remote:*)",
+      "Bash(git add:*)"
     ]
   }
 }
