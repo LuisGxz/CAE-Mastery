@@ -5,6 +5,8 @@
 //   3. localStorage                   → fallback universal
 // ──────────────────────────────────────────────────────────────────────────────
 
+import { migrateState } from './data'
+
 // ─── Electron (Node.js fs) ────────────────────────────────────────────────────
 
 export const isElectron = () => typeof window !== 'undefined' && !!window.electronAPI
@@ -12,7 +14,7 @@ export const isElectron = () => typeof window !== 'undefined' && !!window.electr
 export async function loadStateElectron(defaultState) {
   try {
     const data = await window.electronAPI.loadData()
-    if (data) return { ...defaultState, ...data }
+    if (data) return migrateState(data, defaultState)
   } catch { /* silent */ }
   return null
 }
@@ -28,7 +30,8 @@ export async function getElectronDataPath() {
 const IDB_NAME = 'cae-mastery-idb';
 const IDB_STORE = 'config';
 const HANDLE_KEY = 'fileHandle';
-const LS_KEY = 'cae-mastery-v4';
+const LS_KEY = 'cae-mastery-c1-v2';
+const OLD_LS_KEYS = ['cae-mastery-v4', 'cae-mastery-redesign-v1'];
 
 // ─── IndexedDB helpers ────────────────────────────────────────────────────────
 
@@ -81,8 +84,12 @@ async function idbDel(key) {
 
 export function loadStateSync(defaultState) {
   try {
-    const raw = localStorage.getItem(LS_KEY);
-    if (raw) return { ...defaultState, ...JSON.parse(raw) };
+    let raw = localStorage.getItem(LS_KEY);
+    if (!raw) {
+      // Migración: lee la clave vieja si la nueva aún no existe.
+      for (const k of OLD_LS_KEYS) { raw = localStorage.getItem(k); if (raw) break; }
+    }
+    if (raw) return migrateState(JSON.parse(raw), defaultState);
   } catch { /* silent */ }
   return defaultState;
 }
@@ -177,7 +184,7 @@ export async function loadStateFromFile(defaultState) {
     if (perm !== 'granted') return null;
     const file = await handle.getFile();
     const text = await file.text();
-    return { ...defaultState, ...JSON.parse(text) };
+    return migrateState(JSON.parse(text), defaultState);
   } catch { return null; }
 }
 

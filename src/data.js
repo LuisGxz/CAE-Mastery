@@ -14,6 +14,9 @@ export const TOTAL_WEEKS = 15;
 export const EXAM_DATE = "26 de septiembre 2026";
 export const START_DATE = new Date(2026, 5, 15); // lunes 15 de junio de 2026
 
+// Versión del esquema de estado. v2 = plan reconstruido a 15 semanas (junio 2026).
+export const SCHEMA_VERSION = 2;
+
 export const PHASES = [
   { name: "Fase 1: Cerrar brechas",   weeks: [1,2,3,4],       focus: "UoE 151→172, Speaking 151→170",          target: "Eliminar gaps críticos",          color: "#ef4444", hrs: "3h L-V + 2h Sáb" },
   { name: "Fase 2: Subir a C1",       weeks: [5,6,7,8],       focus: "Writing→180, Listening→180, todo arriba", target: "Todas ≥175",                      color: "#f59e0b", hrs: "3h L-V + 2h Sáb" },
@@ -1134,6 +1137,32 @@ export function daysUntilExam() {
   return Math.max(0, Math.ceil((exam - new Date()) / 86400000));
 }
 
+// Semana del plan (1..TOTAL_WEEKS) según la fecha actual vs START_DATE.
+export function currentWeekFromDate(now = Date.now()) {
+  const diffDays = Math.floor((now - START_DATE.getTime()) / 86400000);
+  const wk = Math.floor(diffDays / 7) + 1;
+  return Math.min(TOTAL_WEEKS, Math.max(1, wk));
+}
+
+/**
+ * Migra el estado crudo cargado (de cualquier backend) al esquema actual.
+ * Recibe el objeto crudo (sin mergear con defaults) para poder detectar la
+ * versión vieja. En v1→v2: descarta dailyChecks (apuntaban a las 27 semanas)
+ * y recalcula currentWeek por fecha; conserva el resto (scores, errores, SR,
+ * diario, logs, totalMinutes).
+ */
+export function migrateState(raw, def) {
+  const base = def || defaultState();
+  if (!raw || typeof raw !== 'object') return base;
+  const merged = { ...base, ...raw };
+  if (raw.schemaVersion !== SCHEMA_VERSION) {
+    merged.dailyChecks = {};
+    merged.currentWeek = currentWeekFromDate();
+    merged.schemaVersion = SCHEMA_VERSION;
+  }
+  return merged;
+}
+
 export function defaultState() {
   return {
     scores: SKILLS.reduce((a, s) => ({
@@ -1143,12 +1172,13 @@ export function defaultState() {
     errors: [],
     diary: [],
     srCards: [],
-    currentWeek: 1,
     shadowLog: [],
     outputLog: [],
     readingLog: [],
     totalMinutes: 0,
     dismissedReminders: [],
+    currentWeek: currentWeekFromDate(),
+    schemaVersion: SCHEMA_VERSION,
   };
 }
 
