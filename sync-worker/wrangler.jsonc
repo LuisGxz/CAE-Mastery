@@ -3,6 +3,7 @@
   "name": "cae-mastery-sync",
   "main": "src/worker.js",
   "compatibility_date": "2026-06-01",
+  "workers_dev": true,
   "observability": { "enabled": true },
   "vars": {
     // Orígenes permitidos para CORS (coma-separados). El de GitHub Pages + dev local.
