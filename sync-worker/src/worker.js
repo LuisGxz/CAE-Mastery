@@ -9,10 +9,13 @@
 // Estrategia de conflictos: última escritura gana (el cliente envía updatedAt).
 // ============================================================
 
-const AUTH_KEY = 'auth';     // KV: hash de la contraseña
+const AUTH_KEY = 'auth';     // KV: { username, salt, hash, iters }
 const STATE_KEY = 'state';   // KV: { data, updatedAt }
+const LOCK_KEY = 'lockout';  // KV: { fails, until }
 const TOKEN_TTL = 60 * 60 * 24 * 30; // 30 días
 const PBKDF2_ITERS = 100000;
+const MAX_FAILS = 3;
+const LOCK_MS = 15 * 60 * 1000; // 15 min de bloqueo tras 3 fallos
 
 // ---------- base64url ----------
 const enc = new TextEncoder();
@@ -99,6 +102,11 @@ async function requireAuth(request, env) {
   return verifyJWT(env.JWT_SECRET, token);
 }
 
+async function readLock(env) {
+  const raw = await env.KV.get(LOCK_KEY);
+  return raw ? JSON.parse(raw) : { fails: 0, until: 0 };
+}
+
 export default {
   async fetch(request, env) {
     const cors = corsHeaders(request, env);
@@ -110,28 +118,54 @@ export default {
     try {
       if (path === '/status' && request.method === 'GET') {
         const auth = await env.KV.get(AUTH_KEY);
-        return json({ initialized: !!auth }, 200, cors);
+        const lock = await readLock(env);
+        const now = Date.now();
+        const locked = lock.until > now;
+        return json({ initialized: !!auth, locked, retryAfter: locked ? Math.ceil((lock.until - now) / 1000) : 0 }, 200, cors);
       }
 
       if (path === '/register' && request.method === 'POST') {
         const existing = await env.KV.get(AUTH_KEY);
         if (existing) return json({ error: 'already_initialized' }, 409, cors);
-        const { password } = await request.json();
+        const { username, password } = await request.json();
+        if (!username || username.length < 3) return json({ error: 'invalid_username' }, 400, cors);
         if (!password || password.length < 8) return json({ error: 'weak_password' }, 400, cors);
         const record = await hashPassword(password);
+        record.username = username;
         await env.KV.put(AUTH_KEY, JSON.stringify(record));
-        const token = await signJWT(env.JWT_SECRET, { sub: 'user', exp: Math.floor(Date.now() / 1000) + TOKEN_TTL });
+        const token = await signJWT(env.JWT_SECRET, { sub: username, exp: Math.floor(Date.now() / 1000) + TOKEN_TTL });
         return json({ token }, 200, cors);
       }
 
       if (path === '/login' && request.method === 'POST') {
         const raw = await env.KV.get(AUTH_KEY);
         if (!raw) return json({ error: 'not_initialized' }, 404, cors);
-        const { password } = await request.json();
-        if (!password || !(await verifyPassword(password, JSON.parse(raw)))) {
-          return json({ error: 'invalid_credentials' }, 401, cors);
+
+        let lock = await readLock(env);
+        const now = Date.now();
+        // El bloqueo expiró → arranca con intentos frescos.
+        if (lock.until && lock.until <= now) lock = { fails: 0, until: 0 };
+        if (lock.until > now) {
+          return json({ error: 'locked', retryAfter: Math.ceil((lock.until - now) / 1000) }, 423, cors);
         }
-        const token = await signJWT(env.JWT_SECRET, { sub: 'user', exp: Math.floor(Date.now() / 1000) + TOKEN_TTL });
+
+        const { username, password } = await request.json();
+        const record = JSON.parse(raw);
+        // Comparación constante: verifica password siempre; usuario sumado al final.
+        const passOk = password ? await verifyPassword(password, record) : false;
+        const ok = passOk && username === record.username;
+        if (!ok) {
+          lock.fails += 1;
+          if (lock.fails >= MAX_FAILS) lock.until = now + LOCK_MS;
+          await env.KV.put(LOCK_KEY, JSON.stringify(lock));
+          if (lock.until > now) {
+            return json({ error: 'locked', retryAfter: Math.ceil((lock.until - now) / 1000) }, 423, cors);
+          }
+          // Respuesta genérica (no revela si falló usuario o contraseña).
+          return json({ error: 'invalid_credentials', attemptsLeft: MAX_FAILS - lock.fails }, 401, cors);
+        }
+        await env.KV.delete(LOCK_KEY); // éxito → resetea el contador
+        const token = await signJWT(env.JWT_SECRET, { sub: record.username, exp: Math.floor(Date.now() / 1000) + TOKEN_TTL });
         return json({ token }, 200, cors);
       }
 

@@ -9,7 +9,14 @@ import {
   saveState,
   getStorageStatus,
 } from '../storage';
-import { isLoggedIn, pull, push, getLocalUpdatedAt, setLocalUpdatedAt } from '../sync';
+import { isLoggedIn, pull, push, getLocalUpdatedAt, setLocalUpdatedAt, clearToken } from '../sync';
+
+// Token rechazado por el servidor (expirado/revocado) → cierra sesión y recarga
+// para volver al muro de acceso.
+function handleAuthError(e) {
+  if (e && e.status === 401) { clearToken(); window.location.reload(); return true; }
+  return false;
+}
 
 export function useAppState() {
   // Sync load from localStorage for instant boot — no flicker
@@ -55,7 +62,8 @@ export function useAppState() {
           setLocalUpdatedAt(remote.updatedAt);
         }
         if (!cancelled) setSyncState('idle');
-      } catch {
+      } catch (e) {
+        if (handleAuthError(e)) return;
         if (!cancelled) setSyncState('error');
       }
     })();
@@ -80,7 +88,7 @@ export function useAppState() {
     pushRef.current = setTimeout(async () => {
       setSyncState('syncing');
       try { await push(state); setSyncState('idle'); }
-      catch { setSyncState('error'); }
+      catch (e) { if (!handleAuthError(e)) setSyncState('error'); }
     }, 2000);
     return () => clearTimeout(pushRef.current);
   }, [state]);

@@ -52,9 +52,7 @@ export default function SyncScreen({ state, setState, setSyncState }) {
   }
   function doLogout() {
     clearToken();
-    setSyncState?.('off');
-    setMode('login');
-    setMsg({ kind: 'info', text: 'Sesión cerrada en este dispositivo. Tus datos locales siguen aquí.' });
+    window.location.reload(); // vuelve al muro de acceso
   }
 
   return (

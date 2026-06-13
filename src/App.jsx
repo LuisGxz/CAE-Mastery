@@ -16,9 +16,17 @@ import MasScreen from './components/screens/MasScreen';
 import ConfigScreen from './components/screens/ConfigScreen';
 import DiarioScreen from './components/screens/DiarioScreen';
 import SyncScreen from './components/screens/SyncScreen';
+import LoginGate from './components/LoginGate';
+import { syncEnabled, isLoggedIn } from './sync';
 import { ChevronLeft, HardDrive, AlertTriangle, RefreshCw, Cloud, CloudOff } from 'lucide-react';
 
 export default function App() {
+  // Muro de acceso: si el sync está configurado y no hay sesión válida, bloquea.
+  if (syncEnabled() && !isLoggedIn()) return <LoginGate />;
+  return <AppShell />;
+}
+
+function AppShell() {
   const { state, setState, up, fileStatus, setFileStatus, syncState, setSyncState } = useAppState();
   const { route, tab, go, back, selectTab, canBack, title } = useNavStack();
   const scrollRef = useRef(null);
