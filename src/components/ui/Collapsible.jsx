@@ -1,24 +1,19 @@
-import { useState } from 'react';
 import Icon from './Icon';
 
-/** Sección plegable con cabecera + chevron. */
-export default function Collapsible({ title, icon, defaultOpen = false, children }) {
-  const [open, setOpen] = useState(defaultOpen);
+/** Sección plegable controlada (open/onToggle gestionados por el padre). */
+export default function Collapsible({ open, onToggle, label, icon, children }) {
   return (
     <div className="ds-card" style={{ padding: 0, overflow: 'hidden' }}>
-      <button
-        className="between"
-        style={{ width: '100%', padding: '13px 14px', cursor: 'pointer' }}
-        onClick={() => setOpen((o) => !o)}
-        aria-expanded={open}
-      >
-        <span className="row" style={{ gap: 9, fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>
-          {icon && <Icon name={icon} size={16} color="var(--accent-2)" />}
-          {title}
+      <button className="between block" onClick={onToggle} style={{ padding: 14, textAlign: 'left' }} aria-expanded={open}>
+        <span className="row" style={{ gap: 9, fontSize: 13.5, fontWeight: 700 }}>
+          <span style={{ width: 30, height: 30, borderRadius: 9, background: 'var(--accent-soft)', color: 'var(--accent-2)', display: 'grid', placeItems: 'center' }}>
+            <Icon name={icon} size={16} />
+          </span>
+          {label}
         </span>
-        <Icon name={open ? 'up' : 'down'} size={17} color="var(--text-4)" />
+        <Icon name={open ? 'up' : 'plus'} size={18} color="var(--text-3)" />
       </button>
-      {open && <div style={{ padding: '0 14px 14px', display: 'grid', gap: 10 }}>{children}</div>}
+      {open && <div style={{ padding: '0 14px 14px' }}>{children}</div>}
     </div>
   );
 }

@@ -1,8 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
-import './styles/tokens.css'   // design tokens (override vestigial index.css vars)
-import './styles/base.css'     // design-system components (T2-T4)
+import './styles/tokens.css'   // design tokens (oklch)
+import './styles/base.css'     // reset + design-system components
 import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(

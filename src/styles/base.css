@@ -4,10 +4,32 @@
    Las pantallas se migran a estas clases en T2-T4.
    ============================================================ */
 
-/* Neutraliza el #root vestigial de index.css (1126px, centrado, borde) */
+/* ---------- Reset + base ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "ss01";
+  min-height: 100vh;
+}
+@media (min-width: 620px) {
+  body {
+    background:
+      radial-gradient(1200px 700px at 50% -10%, oklch(0.24 0.03 256 / 0.5), transparent 60%),
+      var(--bg);
+  }
+}
 #root { width: 100%; min-height: 100%; margin: 0; text-align: left; border: 0; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+input, select, textarea { font-family: inherit; }
+::selection { background: var(--accent-soft); }
 
 .tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+.block { width: 100%; }
 
 /* ---------- App shell ---------- */
 .app-shell {

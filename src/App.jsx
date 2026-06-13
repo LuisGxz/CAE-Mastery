@@ -2,20 +2,20 @@ import { useState, useEffect, useRef } from 'react';
 import { TOTAL_WEEKS, daysUntilExam, defaultState } from './data';
 import { useAppState } from './hooks/useAppState';
 import { useNavStack } from './hooks/useNavStack';
-import BottomNav from './components/ui/BottomNav';
-import { PracticaHub, MasMenu } from './components/screens/Hubs';
-import HomeTab from './components/tabs/HomeTab';
-import PlanTab from './components/tabs/PlanTab';
-import TrackerTab from './components/tabs/TrackerTab';
-import ErrorBankTab from './components/tabs/ErrorBankTab';
-import DiaryTab from './components/tabs/DiaryTab';
-import ReadingTab from './components/tabs/ReadingTab';
-import SRTab from './components/tabs/SRTab';
-import ShadowTab from './components/tabs/ShadowTab';
-import OutputTab from './components/tabs/OutputTab';
-import ConfigTab from './components/tabs/ConfigTab';
+import { BottomNav } from './components/ui';
+import HoyScreen from './components/screens/HoyScreen';
+import PlanScreen from './components/screens/PlanScreen';
+import ProgresoScreen from './components/screens/ProgresoScreen';
+import PracticaScreen from './components/screens/PracticaScreen';
+import SRScreen from './components/screens/SRScreen';
+import ErroresScreen from './components/screens/ErroresScreen';
+import LecturaScreen from './components/screens/LecturaScreen';
+import ShadowScreen from './components/screens/ShadowScreen';
+import OutputScreen from './components/screens/OutputScreen';
+import MasScreen from './components/screens/MasScreen';
+import ConfigScreen from './components/screens/ConfigScreen';
+import DiarioScreen from './components/screens/DiarioScreen';
 import { ChevronLeft, HardDrive, AlertTriangle } from 'lucide-react';
-import './App.css';
 
 export default function App() {
   const { state, setState, up, fileStatus, setFileStatus } = useAppState();
@@ -35,29 +35,28 @@ export default function App() {
 
   function renderScreen() {
     switch (route) {
-      case 'hoy':      return <HomeTab state={state} up={up} />;
-      case 'plan':     return <PlanTab state={state} up={up} />;
-      case 'practica': return <PracticaHub state={state} go={go} now={now} />;
-      case 'sr':       return <SRTab state={state} up={up} />;
-      case 'errores':  return <ErrorBankTab state={state} up={up} />;
-      case 'lectura':  return <ReadingTab state={state} up={up} />;
-      case 'shadow':   return <ShadowTab state={state} up={up} />;
-      case 'output':   return <OutputTab state={state} up={up} />;
-      case 'progreso': return <TrackerTab state={state} />;
-      case 'mas':      return <MasMenu state={state} go={go} />;
-      case 'diario':   return <DiaryTab state={state} up={up} />;
+      case 'hoy':      return <HoyScreen state={state} up={up} go={go} now={now} />;
+      case 'plan':     return <PlanScreen state={state} up={up} />;
+      case 'practica': return <PracticaScreen state={state} go={go} now={now} />;
+      case 'sr':       return <SRScreen state={state} up={up} now={now} />;
+      case 'errores':  return <ErroresScreen state={state} up={up} />;
+      case 'lectura':  return <LecturaScreen state={state} up={up} />;
+      case 'shadow':   return <ShadowScreen state={state} up={up} />;
+      case 'output':   return <OutputScreen state={state} up={up} />;
+      case 'progreso': return <ProgresoScreen state={state} up={up} />;
+      case 'mas':      return <MasScreen go={go} />;
+      case 'diario':   return <DiarioScreen state={state} up={up} now={now} />;
       case 'config':
         return (
-          <ConfigTab
+          <ConfigScreen
             state={state}
             setState={setState}
             fileStatus={fileStatus}
             setFileStatus={setFileStatus}
             defaultState={defaultState}
-            daysLeft={daysLeft}
           />
         );
-      default:         return <HomeTab state={state} up={up} />;
+      default:         return <HoyScreen state={state} up={up} go={go} now={now} />;
     }
   }
 

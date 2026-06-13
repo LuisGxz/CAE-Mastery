@@ -1,89 +1,52 @@
 import { useState } from 'react';
 import Icon from './Icon';
+import ResourceBlock from './ResourceBlock';
 import { CAT_VAR } from '../../lib/logic';
 
 /**
- * Fila de tarea del plan: checkbox 22px + label + detalle expandible
- * (pasos y recurso con botón "Copiar").
+ * Fila de tarea del plan: checkbox 22px + label + técnica + detalle expandible
+ * (pasos numerados y recurso con "Copiar"). onToggle recibe (week, day, taskText).
  */
-export default function TaskRow({ task, checked, onToggle }) {
-  const [open, setOpen] = useState(false);
-  const [copied, setCopied] = useState(false);
+export default function TaskRow({ task, week, day, checked, onToggle, defaultOpen }) {
+  const [open, setOpen] = useState(!!defaultOpen);
   const hasDetail = (task.steps && task.steps.length > 0) || !!task.resource;
-
-  function copyResource() {
-    if (!task.resource || !navigator.clipboard) return;
-    navigator.clipboard.writeText(task.resource);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1400);
-  }
-
   return (
-    <div style={{ borderRadius: 'var(--r-sm)', background: checked ? 'var(--success-soft)' : 'transparent', transition: 'background .15s ease' }}>
-      <div className="row" style={{ gap: 10, padding: '8px 8px', alignItems: 'flex-start' }}>
+    <div style={{ borderBottom: '1px solid var(--hairline)', padding: '11px 0' }}>
+      <div className="row" style={{ gap: 11, alignItems: 'flex-start' }}>
         <button
-          onClick={onToggle}
-          aria-label={checked ? 'Marcar como pendiente' : 'Marcar como hecha'}
+          onClick={() => onToggle(week, day, task.t)}
+          aria-label="Completar"
           style={{
             width: 22, height: 22, flexShrink: 0, marginTop: 1, borderRadius: 7,
-            display: 'grid', placeItems: 'center', cursor: 'pointer',
-            background: checked ? 'var(--success)' : 'transparent',
             border: checked ? 'none' : '2px solid var(--border-2)',
-            transition: 'all .15s ease',
+            background: checked ? 'var(--success)' : 'transparent',
+            display: 'grid', placeItems: 'center', transition: 'all .15s ease', cursor: 'pointer',
           }}
         >
-          {checked && <Icon name="check" size={14} color="#fff" strokeWidth={3} />}
+          {checked && <Icon name="check" size={13} color="#0b140d" strokeWidth={3} />}
         </button>
-
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <button
-            onClick={() => hasDetail && setOpen((o) => !o)}
-            style={{ textAlign: 'left', width: '100%', cursor: hasDetail ? 'pointer' : 'default' }}
-          >
-            <span style={{
-              fontSize: 13, fontWeight: 600, lineHeight: 1.4,
-              color: checked ? 'var(--text-3)' : 'var(--text)',
-              textDecoration: checked ? 'line-through' : 'none',
-            }}>
-              {task.t}
-            </span>
-          </button>
-          {task.technique && (
-            <div style={{ fontSize: 11, fontWeight: 700, color: CAT_VAR[task.cat] || 'var(--text-3)', marginTop: 2 }}>
-              {task.technique}
-            </div>
-          )}
-
-          {open && hasDetail && (
-            <div style={{ marginTop: 8, display: 'grid', gap: 8 }}>
-              {task.steps && task.steps.length > 0 && (
-                <ol style={{ margin: 0, paddingLeft: 18, display: 'grid', gap: 4 }}>
-                  {task.steps.map((s, i) => (
-                    <li key={i} style={{ fontSize: 12, color: 'var(--text-2)', lineHeight: 1.45 }}>{s}</li>
-                  ))}
-                </ol>
-              )}
-              {task.resource && (
-                <div className="ds-card" style={{ padding: 10, background: 'var(--input-bg)' }}>
-                  <div style={{ fontSize: 11.5, color: 'var(--text-2)', lineHeight: 1.5, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
-                    {task.resource}
-                  </div>
-                  <button className="ds-btn sm" style={{ marginTop: 8 }} onClick={copyResource}>
-                    <Icon name={copied ? 'check' : 'copy'} size={14} />
-                    {copied ? 'Copiado' : 'Copiar'}
-                  </button>
-                </div>
-              )}
-            </div>
-          )}
+        <div style={{ flex: 1, minWidth: 0, cursor: hasDetail ? 'pointer' : 'default' }} onClick={() => hasDetail && setOpen((o) => !o)}>
+          <div className="row" style={{ gap: 7, alignItems: 'flex-start' }}>
+            <span className="dot" style={{ background: CAT_VAR[task.cat], marginTop: 6 }} />
+            <span style={{ fontSize: 13, lineHeight: 1.45, color: checked ? 'var(--text-4)' : 'var(--text)', textDecoration: checked ? 'line-through' : 'none' }}>{task.t}</span>
+          </div>
+          <div className="row between" style={{ marginLeft: 14, marginTop: 4 }}>
+            <span style={{ fontSize: 11, color: 'var(--text-4)', fontStyle: 'italic' }}>{task.technique}</span>
+            {hasDetail && <Icon name={open ? 'up' : 'down'} size={14} color="var(--text-4)" />}
+          </div>
         </div>
-
-        {hasDetail && (
-          <button onClick={() => setOpen((o) => !o)} aria-label="Detalle" style={{ cursor: 'pointer', marginTop: 2 }}>
-            <Icon name={open ? 'up' : 'down'} size={16} color="var(--text-4)" />
-          </button>
-        )}
       </div>
+      {open && hasDetail && (
+        <div style={{ marginLeft: 33, marginTop: 9 }}>
+          {task.steps && task.steps.map((s, i) => (
+            <div key={i} className="row" style={{ gap: 8, alignItems: 'flex-start', marginBottom: 6 }}>
+              <span style={{ fontSize: 10, fontWeight: 800, color: 'var(--accent-2)', marginTop: 1, minWidth: 13 }}>{i + 1}</span>
+              <span style={{ fontSize: 12, color: 'var(--text-2)', lineHeight: 1.45 }}>{s}</span>
+            </div>
+          ))}
+          {task.resource && <ResourceBlock res={task.resource} />}
+        </div>
+      )}
     </div>
   );
 }

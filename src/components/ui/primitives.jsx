@@ -1,5 +1,14 @@
 import Icon from './Icon';
+import { SKILLS } from '../../data';
 import { SKILL_VAR } from '../../lib/logic';
+
+export function SkillSelect({ value, onChange }) {
+  return (
+    <select className="ds-inp" value={value} onChange={(e) => onChange(e.target.value)}>
+      {SKILLS.map((s) => <option key={s.key} value={s.key}>{s.label}</option>)}
+    </select>
+  );
+}
 
 export function ProgressBar({ pct, color, lg }) {
   return (
