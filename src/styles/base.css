@@ -36,8 +36,10 @@ input, select, textarea { font-family: inherit; }
   width: 100%;
   max-width: var(--app-w);
   margin: 0 auto;
-  min-height: 100vh;
-  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;       /* altura fija = viewport: el contenido scrollea dentro,
+                           la barra inferior queda siempre fija al fondo */
+  overflow: hidden;
   position: relative;
   background: var(--bg);
   display: flex;
@@ -102,6 +104,7 @@ input, select, textarea { font-family: inherit; }
 
 .scroll-area {
   flex: 1;
+  min-height: 0;          /* permite que el flex item scrollee en vez de crecer */
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
