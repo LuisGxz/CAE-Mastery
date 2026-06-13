@@ -16,7 +16,7 @@ export const TAB_OF = {
   practica: 'practica', sr: 'practica', errores: 'practica',
   lectura: 'practica', shadow: 'practica', output: 'practica',
   progreso: 'progreso',
-  mas: 'mas', config: 'mas', diario: 'mas',
+  mas: 'mas', config: 'mas', diario: 'mas', sync: 'mas',
 };
 
 // Título mostrado en la topbar por ruta.
@@ -33,6 +33,7 @@ export const ROUTE_TITLE = {
   mas: 'Más',
   config: 'Ajustes y respaldo',
   diario: 'Diario de estudio',
+  sync: 'Sincronización',
 };
 
 // Raíces de tab: no muestran botón "atrás".

@@ -9,6 +9,7 @@ import {
   saveState,
   getStorageStatus,
 } from '../storage';
+import { isLoggedIn, pull, push, getLocalUpdatedAt, setLocalUpdatedAt } from '../sync';
 
 export function useAppState() {
   // Sync load from localStorage for instant boot — no flicker
@@ -16,19 +17,20 @@ export function useAppState() {
 
   // 'electron' | 'ready' | 'needs_permission' | 'not_configured' | 'unsupported' | 'checking'
   const [fileStatus, setFileStatus] = useState('checking');
+  // Cloud sync: 'off' | 'idle' | 'syncing' | 'error'
+  const [syncState, setSyncState] = useState(isLoggedIn() ? 'idle' : 'off');
 
   const saveRef = useRef(null);
+  const pushRef = useRef(null);
 
-  // On mount: detect environment and load persisted data
+  // On mount: detect environment and load persisted data (local backends)
   useEffect(() => {
     async function init() {
       if (isElectron()) {
-        // Best case: Electron — loads from AppData via Node.js fs
         const data = await loadStateElectron(defaultState());
         if (data) setState(data);
         setFileStatus('electron');
       } else {
-        // Browser: try File System Access API, fall back to localStorage
         const status = await getStorageStatus();
         setFileStatus(status);
         if (status === 'ready') {
@@ -40,21 +42,50 @@ export function useAppState() {
     init();
   }, []);
 
-  // Debounced auto-save (500ms)
+  // On mount: if logged into cloud sync, pull remote and adopt if newer.
+  useEffect(() => {
+    if (!isLoggedIn()) return;
+    let cancelled = false;
+    (async () => {
+      setSyncState('syncing');
+      try {
+        const remote = await pull();
+        if (!cancelled && remote && remote.updatedAt > getLocalUpdatedAt()) {
+          setState((prev) => ({ ...prev, ...remote.data }));
+          setLocalUpdatedAt(remote.updatedAt);
+        }
+        if (!cancelled) setSyncState('idle');
+      } catch {
+        if (!cancelled) setSyncState('error');
+      }
+    })();
+    return () => { cancelled = true; };
+  }, []);
+
+  // Debounced auto-save (local backends, 500ms)
   useEffect(() => {
     if (fileStatus === 'checking') return;
     if (saveRef.current) clearTimeout(saveRef.current);
     saveRef.current = setTimeout(() => {
-      if (fileStatus === 'electron') {
-        saveStateElectron(state);
-      } else {
-        saveState(state, fileStatus);
-      }
+      if (fileStatus === 'electron') saveStateElectron(state);
+      else saveState(state, fileStatus);
     }, 500);
     return () => clearTimeout(saveRef.current);
   }, [state, fileStatus]);
 
-  const up = useCallback((fn) => setState(p => ({ ...p, ...fn(p) })), []);
+  // Debounced cloud push (2s) when logged in
+  useEffect(() => {
+    if (!isLoggedIn()) return;
+    if (pushRef.current) clearTimeout(pushRef.current);
+    pushRef.current = setTimeout(async () => {
+      setSyncState('syncing');
+      try { await push(state); setSyncState('idle'); }
+      catch { setSyncState('error'); }
+    }, 2000);
+    return () => clearTimeout(pushRef.current);
+  }, [state]);
 
-  return { state, setState, up, fileStatus, setFileStatus };
+  const up = useCallback((fn) => setState((p) => ({ ...p, ...fn(p) })), []);
+
+  return { state, setState, up, fileStatus, setFileStatus, syncState, setSyncState };
 }

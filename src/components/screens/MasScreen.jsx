@@ -1,6 +1,7 @@
 import { Icon } from '../ui';
 
 const ROWS = [
+  { route: 'sync', icon: 'globe', title: 'Sincronización', sub: 'Móvil · web · escritorio' },
   { route: 'config', icon: 'settings', title: 'Ajustes y respaldo', sub: 'Exportar, importar y reiniciar datos' },
   { route: 'diario', icon: 'edit', title: 'Diario de estudio', sub: 'Racha, mood y minutos' },
   { route: 'sr', icon: 'layers', title: 'Repaso espaciado', sub: 'Flashcards SM-2' },

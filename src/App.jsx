@@ -15,10 +15,11 @@ import OutputScreen from './components/screens/OutputScreen';
 import MasScreen from './components/screens/MasScreen';
 import ConfigScreen from './components/screens/ConfigScreen';
 import DiarioScreen from './components/screens/DiarioScreen';
-import { ChevronLeft, HardDrive, AlertTriangle } from 'lucide-react';
+import SyncScreen from './components/screens/SyncScreen';
+import { ChevronLeft, HardDrive, AlertTriangle, RefreshCw, Cloud, CloudOff } from 'lucide-react';
 
 export default function App() {
-  const { state, setState, up, fileStatus, setFileStatus } = useAppState();
+  const { state, setState, up, fileStatus, setFileStatus, syncState, setSyncState } = useAppState();
   const { route, tab, go, back, selectTab, canBack, title } = useNavStack();
   const scrollRef = useRef(null);
 
@@ -46,6 +47,7 @@ export default function App() {
       case 'progreso': return <ProgresoScreen state={state} up={up} />;
       case 'mas':      return <MasScreen go={go} />;
       case 'diario':   return <DiarioScreen state={state} up={up} now={now} />;
+      case 'sync':     return <SyncScreen state={state} setState={setState} setSyncState={setSyncState} />;
       case 'config':
         return (
           <ConfigScreen
@@ -77,9 +79,18 @@ export default function App() {
               )}
             </div>
           </div>
-          {(fileStatus === 'ready' || fileStatus === 'electron') && (
-            <span className="ds-pill success"><HardDrive size={12} /> disco</span>
-          )}
+          <div className="row" style={{ gap: 6 }}>
+            {syncState !== 'off' && (
+              <button className="ds-pill" onClick={() => go('sync')}
+                style={{ cursor: 'pointer', color: syncState === 'error' ? 'var(--danger)' : 'var(--accent-2)', background: syncState === 'error' ? 'var(--danger-soft)' : 'var(--accent-soft)' }}
+                title={syncState === 'error' ? 'Error de sync' : syncState === 'syncing' ? 'Sincronizando…' : 'Sincronizado'}>
+                {syncState === 'error' ? <CloudOff size={12} /> : syncState === 'syncing' ? <RefreshCw size={12} /> : <Cloud size={12} />}
+              </button>
+            )}
+            {(fileStatus === 'ready' || fileStatus === 'electron') && (
+              <span className="ds-pill success"><HardDrive size={12} /> disco</span>
+            )}
+          </div>
         </div>
 
         {showReconnectBanner && (
