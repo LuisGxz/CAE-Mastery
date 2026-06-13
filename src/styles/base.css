@@ -43,16 +43,61 @@ input, select, textarea { font-family: inherit; }
   display: flex;
   flex-direction: column;
 }
-@media (min-width: 620px) {
+/* Desktop: layout web real — sidebar nav a la izquierda + contenido.
+   Sin marco de móvil. Mobile-first: por debajo de 920px se mantiene la
+   barra inferior. */
+@media (min-width: 920px) {
   .app-shell {
-    min-height: 880px;
-    height: calc(100dvh - 40px);
-    margin: 20px auto;
-    border: 1px solid var(--border);
-    border-radius: 30px;
-    overflow: hidden;
-    box-shadow: var(--shadow-pop);
+    max-width: 1160px;
+    min-height: 100dvh;
+    display: grid;
+    grid-template-columns: 244px minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-areas: "nav topbar" "nav main";
   }
+  .topbar { grid-area: topbar; }
+  .scroll-area { grid-area: main; }
+  .page {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 28px 40px;
+  }
+
+  .bottom-nav {
+    grid-area: nav;
+    position: sticky; top: 0; inset: 0 auto auto auto;
+    align-self: start;
+    height: 100dvh;
+    width: auto;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 4px;
+    padding: 20px 14px;
+    border-top: 0;
+    border-right: 1px solid var(--hairline);
+    background: var(--surface);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .bottom-nav::before {
+    content: "CAE Mastery";
+    display: block;
+    font-size: 15px; font-weight: 800; letter-spacing: -0.02em;
+    color: var(--text); padding: 6px 14px 18px;
+  }
+  .nav-item {
+    flex: 0 0 auto;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 11px 14px;
+    border-radius: var(--r-sm);
+    font-size: 13.5px;
+  }
+  .nav-item svg { width: 19px; height: 19px; }
+  .nav-item:hover { color: var(--text-2); background: var(--surface-2); }
+  .nav-item.active { background: var(--accent-soft); }
+  .nav-item .nav-badge { position: static; top: auto; left: auto; margin-left: auto; }
 }
 
 .scroll-area {
