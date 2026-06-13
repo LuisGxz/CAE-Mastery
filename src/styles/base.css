@@ -4,6 +4,9 @@
    Las pantallas se migran a estas clases en T2-T4.
    ============================================================ */
 
+/* Neutraliza el #root vestigial de index.css (1126px, centrado, borde) */
+#root { width: 100%; min-height: 100%; margin: 0; text-align: left; border: 0; }
+
 .tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
 
 /* ---------- App shell ---------- */

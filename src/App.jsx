@@ -1,6 +1,9 @@
-import { useState } from 'react';
-import { TABS, EXAM_DATE, TOTAL_WEEKS, daysUntilExam, defaultState } from './data';
+import { useState, useEffect, useRef } from 'react';
+import { TOTAL_WEEKS, daysUntilExam, defaultState } from './data';
 import { useAppState } from './hooks/useAppState';
+import { useNavStack } from './hooks/useNavStack';
+import BottomNav from './components/ui/BottomNav';
+import { PracticaHub, MasMenu } from './components/screens/Hubs';
 import HomeTab from './components/tabs/HomeTab';
 import PlanTab from './components/tabs/PlanTab';
 import TrackerTab from './components/tabs/TrackerTab';
@@ -11,85 +14,40 @@ import SRTab from './components/tabs/SRTab';
 import ShadowTab from './components/tabs/ShadowTab';
 import OutputTab from './components/tabs/OutputTab';
 import ConfigTab from './components/tabs/ConfigTab';
-import { Settings, HardDrive, AlertTriangle } from 'lucide-react';
+import { ChevronLeft, HardDrive, AlertTriangle } from 'lucide-react';
 import './App.css';
 
 export default function App() {
   const { state, setState, up, fileStatus, setFileStatus } = useAppState();
-  const [tab, setTab] = useState('Home');
+  const { route, tab, go, back, selectTab, canBack, title } = useNavStack();
+  const scrollRef = useRef(null);
+
+  // `now` se fija al montar (evita Date.now() impuro en render). El badge SR
+  // baja igual al calificar, porque sm2() empuja nextReview al futuro.
+  const [now] = useState(Date.now);
+  useEffect(() => {
+    if (scrollRef.current) scrollRef.current.scrollTop = 0;
+  }, [route]);
 
   const daysLeft = daysUntilExam();
-  const dueCount = state.srCards.filter(c => c.nextReview <= Date.now()).length;
-
-  // Storage status banner shown when file storage needs re-connection
+  const dueCount = state.srCards.filter((c) => c.nextReview <= now).length;
   const showReconnectBanner = fileStatus === 'needs_permission';
 
-  return (
-    <div className="app">
-      {/* Sticky header + tabs */}
-      <div className="sticky-header">
-        <div style={{ position: "relative", textAlign: "center", padding: "12px 0 8px" }}>
-          <h1 style={{ fontSize: 22, fontWeight: 800, fontFamily: "'Manrope', system-ui, sans-serif", letterSpacing: "-0.02em", color: "var(--text)" }}>
-            CAE Mastery <span style={{ color: "var(--accent-2)" }}>→ {EXAM_DATE}</span>
-          </h1>
-          <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 6, flexWrap: "wrap" }}>
-            <span className="pill" style={{ background: "rgba(239,68,68,0.15)", color: "#fca5a5", fontWeight: 600 }}>{daysLeft} días</span>
-            <span className="pill" style={{ background: "rgba(168,85,247,0.15)", color: "#c4b5fd" }}>Sem {state.currentWeek}/{TOTAL_WEEKS}</span>
-            {fileStatus === 'ready' && (
-              <span className="pill" style={{ background: "rgba(34,197,94,0.12)", color: "#86efac", fontSize: 11, display: "inline-flex", alignItems: "center", gap: 4 }}><HardDrive size={12} /> disco</span>
-            )}
-          </div>
-          {/* Settings icon */}
-          <button
-            onClick={() => setTab(tab === 'Config' ? 'Home' : 'Config')}
-            title="Configuración"
-            style={{
-              position: "absolute", top: 10, right: 0,
-              background: tab === 'Config' ? "rgba(99,102,241,0.25)" : "rgba(255,255,255,0.05)",
-              border: tab === 'Config' ? "1px solid rgba(99,102,241,0.5)" : "1px solid rgba(255,255,255,0.1)",
-              borderRadius: 8, padding: "6px 8px", cursor: "pointer",
-              color: tab === 'Config' ? "#a5b4fc" : "#64748b",
-              fontSize: 16, lineHeight: 1, transition: "all 0.2s",
-              display: "inline-flex", alignItems: "center", justifyContent: "center",
-            }}
-          >
-            <Settings size={16} />
-          </button>
-        </div>
-
-        {/* Reconnect banner */}
-        {showReconnectBanner && (
-          <div className="reminder info" style={{ cursor: "pointer", marginBottom: 8 }} onClick={() => setTab('Config')}>
-            <span style={{ fontSize: 12, color: "#93c5fd", display: "inline-flex", alignItems: "center", gap: 6 }}>
-              <AlertTriangle size={13} /> El archivo en disco necesita reconectarse. Haz clic o ve a Config → Reconectar archivo.
-            </span>
-          </div>
-        )}
-
-        {/* Tabs (sin Config) */}
-        {tab !== 'Config' && (
-          <div className="tabs">
-            {TABS.map(tb => (
-              <button key={tb} className={`tab ${tab === tb ? "active" : ""}`} onClick={() => setTab(tb)}>
-                {tb === 'SR' && dueCount > 0 ? `SR (${dueCount})` : tb}
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Tab content */}
-      <div className="tab-content">
-        {tab === 'Home'    && <HomeTab     state={state} up={up} />}
-        {tab === 'Plan'    && <PlanTab     state={state} up={up} />}
-        {tab === 'Tracker' && <TrackerTab  state={state} />}
-        {tab === 'Errores' && <ErrorBankTab state={state} up={up} />}
-        {tab === 'Diario'  && <DiaryTab    state={state} up={up} />}
-        {tab === 'Lectura' && <ReadingTab  state={state} up={up} />}
-        {tab === 'SR'      && <SRTab       state={state} up={up} />}
-        {tab === 'Shadow'  && <ShadowTab   state={state} up={up} />}
-        {tab === 'Output'  && <OutputTab   state={state} up={up} />}
-        {tab === 'Config'  && (
+  function renderScreen() {
+    switch (route) {
+      case 'hoy':      return <HomeTab state={state} up={up} />;
+      case 'plan':     return <PlanTab state={state} up={up} />;
+      case 'practica': return <PracticaHub state={state} go={go} now={now} />;
+      case 'sr':       return <SRTab state={state} up={up} />;
+      case 'errores':  return <ErrorBankTab state={state} up={up} />;
+      case 'lectura':  return <ReadingTab state={state} up={up} />;
+      case 'shadow':   return <ShadowTab state={state} up={up} />;
+      case 'output':   return <OutputTab state={state} up={up} />;
+      case 'progreso': return <TrackerTab state={state} />;
+      case 'mas':      return <MasMenu state={state} go={go} />;
+      case 'diario':   return <DiaryTab state={state} up={up} />;
+      case 'config':
+        return (
           <ConfigTab
             state={state}
             setState={setState}
@@ -98,12 +56,51 @@ export default function App() {
             defaultState={defaultState}
             daysLeft={daysLeft}
           />
-        )}
-      </div>
+        );
+      default:         return <HomeTab state={state} up={up} />;
+    }
+  }
 
-      <div style={{ textAlign: "center", padding: "16px 0 8px", color: "#475569", fontSize: 10 }}>
-        CAE Mastery | {EXAM_DATE} | {daysLeft} días
-      </div>
+  return (
+    <div className="app-shell">
+      <header className="topbar">
+        <div className="topbar-row">
+          <div className="row" style={{ gap: 10 }}>
+            {canBack && (
+              <button className="icon-btn" onClick={back} aria-label="Atrás">
+                <ChevronLeft size={18} />
+              </button>
+            )}
+            <div>
+              <h1>{title}</h1>
+              {route === 'hoy' && (
+                <div className="sub tnum">{daysLeft} días · Sem {state.currentWeek}/{TOTAL_WEEKS}</div>
+              )}
+            </div>
+          </div>
+          {(fileStatus === 'ready' || fileStatus === 'electron') && (
+            <span className="ds-pill success"><HardDrive size={12} /> disco</span>
+          )}
+        </div>
+
+        {showReconnectBanner && (
+          <button
+            className="ds-card between"
+            style={{ width: '100%', marginTop: 10, cursor: 'pointer', padding: 12 }}
+            onClick={() => go('config')}
+          >
+            <span className="row" style={{ gap: 8, color: 'var(--warn)', fontSize: 12, fontWeight: 600 }}>
+              <AlertTriangle size={14} /> Reconecta el archivo en disco — toca para ir a Ajustes.
+            </span>
+          </button>
+        )}
+      </header>
+
+      <main className="scroll-area" ref={scrollRef}>
+        {renderScreen()}
+      </main>
+
+      <BottomNav activeTab={tab} onSelect={selectTab} dueCount={dueCount} />
     </div>
   );
 }
