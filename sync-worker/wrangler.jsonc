@@ -1,0 +1,14 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "cae-mastery-sync",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-06-01",
+  "observability": { "enabled": true },
+  "vars": {
+    // Orígenes permitidos para CORS (coma-separados). El de GitHub Pages + dev local.
+    "ALLOWED_ORIGINS": "https://luisgxz.github.io,http://localhost:5173,http://localhost:4173"
+  },
+  "kv_namespaces": [
+    { "binding": "KV", "id": "10d8c78c418b4486be67a67e9b6edc8d" }
+  ]
+}

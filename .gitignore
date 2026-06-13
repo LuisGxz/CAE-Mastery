@@ -14,6 +14,11 @@ dist-ssr
 build/
 release/
 
+# Cloudflare Wrangler
+.wrangler/
+.dev.vars
+*.jwt_secret.tmp
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
