@@ -13,8 +13,8 @@ export default defineConfig({
         name: 'CAE Mastery System',
         short_name: 'CAE Mastery',
         description: 'Sistema de preparación CAE — 15 semanas → 26 Sept 2026',
-        theme_color: '#0f172a',
-        background_color: '#0f172a',
+        theme_color: '#161a22',
+        background_color: '#161a22',
         display: 'standalone',
         start_url: './',
         icons: [

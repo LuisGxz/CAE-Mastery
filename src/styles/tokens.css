@@ -1,0 +1,58 @@
+/* ============================================================
+   CAE Mastery — Design tokens (dark, refinado, acento azul)
+   Portado de docs/design_handoff_cae_redesign/styles.css
+   La fuente Manrope se carga vía <link> en index.html.
+   ============================================================ */
+
+:root {
+  /* Superficies (charcoal frío, casi negro) */
+  --bg:          oklch(0.155 0.012 255);
+  --surface:     oklch(0.195 0.013 255);
+  --surface-2:   oklch(0.235 0.014 255);
+  --surface-3:   oklch(0.285 0.015 255);
+  --input-bg:    oklch(0.165 0.013 255);
+
+  /* Bordes */
+  --border:      oklch(0.32 0.014 255 / 0.55);
+  --border-2:    oklch(0.40 0.018 255 / 0.7);
+  --hairline:    oklch(0.30 0.012 255 / 0.4);
+
+  /* Texto */
+  --text:        oklch(0.96 0.004 255);
+  --text-2:      oklch(0.74 0.013 255);
+  --text-3:      oklch(0.58 0.014 255);
+  --text-4:      oklch(0.46 0.013 255);
+
+  /* Acento azul */
+  --accent:      oklch(0.64 0.16 256);
+  --accent-2:    oklch(0.70 0.15 256);
+  --accent-ink:  oklch(0.97 0.02 256);
+  --accent-soft: oklch(0.64 0.16 256 / 0.14);
+  --accent-line: oklch(0.64 0.16 256 / 0.32);
+
+  /* Estados */
+  --success:     oklch(0.74 0.15 152);
+  --success-soft:oklch(0.74 0.15 152 / 0.13);
+  --warn:        oklch(0.80 0.14 78);
+  --warn-soft:   oklch(0.80 0.14 78 / 0.13);
+  --danger:      oklch(0.68 0.18 22);
+  --danger-soft: oklch(0.68 0.18 22 / 0.13);
+
+  /* Skills (paleta de datos, chroma consistente) */
+  --sk-reading:  oklch(0.74 0.14 150);
+  --sk-uoe:      oklch(0.68 0.17 22);
+  --sk-writing:  oklch(0.80 0.13 78);
+  --sk-listening:oklch(0.72 0.13 244);
+  --sk-speaking: oklch(0.70 0.15 300);
+
+  --r-lg: 18px;
+  --r:    14px;
+  --r-sm: 10px;
+  --r-xs: 8px;
+
+  --shadow: 0 1px 2px oklch(0 0 0 / 0.4), 0 8px 24px oklch(0 0 0 / 0.28);
+  --shadow-pop: 0 12px 40px oklch(0 0 0 / 0.5);
+
+  --app-w: 460px;
+  --nav-h: 66px;
+}

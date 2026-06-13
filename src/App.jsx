@@ -11,6 +11,7 @@ import SRTab from './components/tabs/SRTab';
 import ShadowTab from './components/tabs/ShadowTab';
 import OutputTab from './components/tabs/OutputTab';
 import ConfigTab from './components/tabs/ConfigTab';
+import { Settings, HardDrive, AlertTriangle } from 'lucide-react';
 import './App.css';
 
 export default function App() {
@@ -28,14 +29,14 @@ export default function App() {
       {/* Sticky header + tabs */}
       <div className="sticky-header">
         <div style={{ position: "relative", textAlign: "center", padding: "12px 0 8px" }}>
-          <h1 style={{ fontSize: 22, fontWeight: 800, background: "linear-gradient(90deg,#60a5fa,#a78bfa,#f472b6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-            CAE Mastery → {EXAM_DATE}
+          <h1 style={{ fontSize: 22, fontWeight: 800, fontFamily: "'Manrope', system-ui, sans-serif", letterSpacing: "-0.02em", color: "var(--text)" }}>
+            CAE Mastery <span style={{ color: "var(--accent-2)" }}>→ {EXAM_DATE}</span>
           </h1>
           <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 6, flexWrap: "wrap" }}>
             <span className="pill" style={{ background: "rgba(239,68,68,0.15)", color: "#fca5a5", fontWeight: 600 }}>{daysLeft} días</span>
             <span className="pill" style={{ background: "rgba(168,85,247,0.15)", color: "#c4b5fd" }}>Sem {state.currentWeek}/{TOTAL_WEEKS}</span>
             {fileStatus === 'ready' && (
-              <span className="pill" style={{ background: "rgba(34,197,94,0.12)", color: "#86efac", fontSize: 11 }}>💾 disco</span>
+              <span className="pill" style={{ background: "rgba(34,197,94,0.12)", color: "#86efac", fontSize: 11, display: "inline-flex", alignItems: "center", gap: 4 }}><HardDrive size={12} /> disco</span>
             )}
           </div>
           {/* Settings icon */}
@@ -49,17 +50,18 @@ export default function App() {
               borderRadius: 8, padding: "6px 8px", cursor: "pointer",
               color: tab === 'Config' ? "#a5b4fc" : "#64748b",
               fontSize: 16, lineHeight: 1, transition: "all 0.2s",
+              display: "inline-flex", alignItems: "center", justifyContent: "center",
             }}
           >
-            ⚙️
+            <Settings size={16} />
           </button>
         </div>
 
         {/* Reconnect banner */}
         {showReconnectBanner && (
           <div className="reminder info" style={{ cursor: "pointer", marginBottom: 8 }} onClick={() => setTab('Config')}>
-            <span style={{ fontSize: 12, color: "#93c5fd" }}>
-              ⚠️ El archivo en disco necesita reconectarse. Haz clic o ve a Config → Reconectar archivo.
+            <span style={{ fontSize: 12, color: "#93c5fd", display: "inline-flex", alignItems: "center", gap: 6 }}>
+              <AlertTriangle size={13} /> El archivo en disco necesita reconectarse. Haz clic o ve a Config → Reconectar archivo.
             </span>
           </div>
         )}
