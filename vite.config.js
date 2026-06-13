@@ -12,7 +12,7 @@ export default defineConfig({
       manifest: {
         name: 'CAE Mastery System',
         short_name: 'CAE Mastery',
-        description: 'Sistema de preparación CAE — 27 semanas → 26 Sept 2026',
+        description: 'Sistema de preparación CAE — 15 semanas → 26 Sept 2026',
         theme_color: '#0f172a',
         background_color: '#0f172a',
         display: 'standalone',

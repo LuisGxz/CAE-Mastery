@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TABS, EXAM_DATE, daysUntilExam, defaultState } from './data';
+import { TABS, EXAM_DATE, TOTAL_WEEKS, daysUntilExam, defaultState } from './data';
 import { useAppState } from './hooks/useAppState';
 import HomeTab from './components/tabs/HomeTab';
 import PlanTab from './components/tabs/PlanTab';
@@ -33,7 +33,7 @@ export default function App() {
           </h1>
           <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 6, flexWrap: "wrap" }}>
             <span className="pill" style={{ background: "rgba(239,68,68,0.15)", color: "#fca5a5", fontWeight: 600 }}>{daysLeft} días</span>
-            <span className="pill" style={{ background: "rgba(168,85,247,0.15)", color: "#c4b5fd" }}>Sem {state.currentWeek}/27</span>
+            <span className="pill" style={{ background: "rgba(168,85,247,0.15)", color: "#c4b5fd" }}>Sem {state.currentWeek}/{TOTAL_WEEKS}</span>
             {fileStatus === 'ready' && (
               <span className="pill" style={{ background: "rgba(34,197,94,0.12)", color: "#86efac", fontSize: 11 }}>💾 disco</span>
             )}

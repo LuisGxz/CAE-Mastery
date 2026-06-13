@@ -10,58 +10,44 @@ export const TABS = ["Home", "Plan", "Tracker", "Errores", "Diario", "Lectura", 
 
 export const CAT_COLORS = { uoe: "#ef4444", speaking: "#a855f7", writing: "#f59e0b", listening: "#3b82f6", reading: "#22c55e", sr: "#06b6d4", review: "#64748b" };
 
-export const TOTAL_WEEKS = 27;
+export const TOTAL_WEEKS = 15;
 export const EXAM_DATE = "26 de septiembre 2026";
-export const START_DATE = new Date(2026, 2, 23);
+export const START_DATE = new Date(2026, 5, 15); // lunes 15 de junio de 2026
 
 export const PHASES = [
-  { name: "Fase 1: Cerrar brechas",   weeks: [1,2,3,4,5,6],       focus: "UoE 151→170, Speaking 151→170",               target: "Eliminar gaps críticos",        color: "#ef4444", hrs: "2h L-V" },
-  { name: "Fase 2: Subir a C1",       weeks: [7,8,9,10,11,12],    focus: "Writing→180, Listening→180, todo arriba",      target: "Todas ≥175",                    color: "#f59e0b", hrs: "2h L-V" },
-  { name: "Fase 3: Consolidar C1",    weeks: [13,14,15,16],       focus: "Mocks semanales, pulir debilidades",           target: "Score global ≥185",             color: "#3b82f6", hrs: "2h L-V" },
-  { name: "Fase 4: Dominar C1",       weeks: [17,18,19,20],       focus: "Simulacros completos, C1 automático",          target: "C1 asegurado (180+)",           color: "#a855f7", hrs: "2h L-V" },
-  { name: "Fase 5: Overtraining C2",  weeks: [21,22,23,24],       focus: "Material CPE — subir ceiling sin mocks CAE",   target: "Entrenar por encima del examen",color: "#ec4899", hrs: "2.5-3h L-V + 2h Sáb" },
-  { name: "Fase 6: CAE con nivel C2", weeks: [25,26],             focus: "Volver al formato CAE — ahora se siente fácil",target: "Simulacros a 193+ o 200+",      color: "#8b5cf6", hrs: "2.5-3h L-V + 2h Sáb" },
-  { name: "Fase 7: Tapering",         weeks: [27],                focus: "Repaso ligero, descanso mental",               target: "Llegar fresco al 26 sept",      color: "#22c55e", hrs: "1h max" },
+  { name: "Fase 1: Cerrar brechas",   weeks: [1,2,3,4],       focus: "UoE 151→172, Speaking 151→170",          target: "Eliminar gaps críticos",          color: "#ef4444", hrs: "3h L-V + 2h Sáb" },
+  { name: "Fase 2: Subir a C1",       weeks: [5,6,7,8],       focus: "Writing→180, Listening→180, todo arriba", target: "Todas ≥175",                      color: "#f59e0b", hrs: "3h L-V + 2h Sáb" },
+  { name: "Fase 3: Consolidar C1",    weeks: [9,10,11],       focus: "Mocks semanales, pulir debilidades",      target: "Score global ≥183",               color: "#3b82f6", hrs: "3h L-V + 2h Sáb" },
+  { name: "Fase 4: Dominar C1",       weeks: [12,13,14],      focus: "Simulacros completos, timing automático", target: "C1 asegurado (180+)",             color: "#a855f7", hrs: "3h L-V + 2h Sáb" },
+  { name: "Fase 5: Tapering",         weeks: [15],            focus: "Repaso ligero, descanso mental",          target: "Llegar fresco al 26 sept",        color: "#22c55e", hrs: "1h max" },
 ];
 
 export const REMINDERS = [
-  { week: 10, text: "📋 INSCRÍBETE AL CAE — Sesión 26 sept 2026. Centro EC051 4007 Guayaquil.", type: "urgent" },
-  { week: 11, text: "📋 ¿Ya te inscribiste al CAE? Hazlo esta semana.",                         type: "urgent" },
-  { week: 12, text: "📋 Último recordatorio inscripción CAE 26 sept.",                          type: "urgent" },
-  { week: 20, text: "🎯 C1 consolidado. Fase 5: Overtraining C2. Sábados activos.",             type: "info"   },
-  { week: 26, text: "🧘 Última semana intensiva. Siguiente es tapering.",                        type: "info"   },
-  { week: 27, text: "🧘 TAPERING. Repaso ligero. Examen sábado 26 sept.",                       type: "success"},
+  { week: 8,  text: "📋 INSCRÍBETE AL CAE — Sesión 26 sept 2026. Centro EC051 4007 Guayaquil.", type: "urgent" },
+  { week: 9,  text: "📋 ¿Ya te inscribiste al CAE? Confírmalo esta semana.",                     type: "urgent" },
+  { week: 10, text: "📋 Último recordatorio inscripción CAE 26 sept.",                          type: "urgent" },
+  { week: 12, text: "🎯 C1 en consolidación — simulacros completos cada semana.",               type: "info"   },
+  { week: 14, text: "🧘 Último simulacro completo. Siguiente es tapering.",                      type: "info"   },
+  { week: 15, text: "🧘 TAPERING. Repaso ligero. Examen sábado 26 sept.",                       type: "success"},
 ];
 
 // ─── Week themes: vocabulary + grammar focus + podcast ────────────────────────
 export const WEEK_DATA = {
-  1:  { vocab: "work & career",               grammar: "Word Formation: sufijos nominales (-tion/-ment/-ness/-ity/-ance)",    podcast: "BBC 6 Minute English",    podcastQ: "bbc 6 minute english career work 2024",           writing: "essay" },
-  2:  { vocab: "work & career",               grammar: "Word Formation: sufijos adjetivales y verbales (-ful/-less/-ous/-ify)",podcast: "BBC 6 Minute English",    podcastQ: "bbc 6 minute english money business salary",      writing: "essay" },
-  3:  { vocab: "technology & communication",  grammar: "Open Cloze: preposiciones en frases fijas (rely on, result in…)",    podcast: "TED Talk",                podcastQ: "TED talk technology future innovation transcript", writing: "essay" },
-  4:  { vocab: "technology & communication",  grammar: "Open Cloze: linking words (although, whereas, nevertheless…)",       podcast: "TED Talk",                podcastQ: "TED talk social media digital life",              writing: "essay" },
-  5:  { vocab: "environment & sustainability",grammar: "KWT: causative have/get something done + passive avanzado",          podcast: "BBC 6 Minute English",    podcastQ: "bbc 6 minute english environment climate change",  writing: "essay" },
-  6:  { vocab: "environment & sustainability",grammar: "KWT: comparisons, so/such/too/enough, result clauses",               podcast: "BBC Global News",         podcastQ: "bbc global news environment sustainability",      writing: "essay" },
-  7:  { vocab: "health & wellbeing",          grammar: "Multiple Choice Cloze: collocations de salud y cuerpo",              podcast: "TED Talk",                podcastQ: "TED talk health mental health wellbeing transcript",writing: "report" },
-  8:  { vocab: "health & wellbeing",          grammar: "Multiple Choice Cloze: idioms y set phrases del CAE",                podcast: "BBC The English We Speak", podcastQ: "bbc the english we speak health body idioms",      writing: "proposal" },
-  9:  { vocab: "education & society",         grammar: "Inversions: Not only…, Rarely…, Hardly…when, No sooner…than",       podcast: "TED Talk",                podcastQ: "TED talk education school future learning",        writing: "review" },
-  10: { vocab: "education & society",         grammar: "Cleft sentences: It was X who/that…, What I need is…",              podcast: "BBC In Our Time",         podcastQ: "bbc in our time education society podcast",       writing: "letter" },
-  11: { vocab: "arts & culture",              grammar: "Participle clauses: Having done…, Built in…, Feeling tired…",       podcast: "TED Talk",                podcastQ: "TED talk art creativity culture design",          writing: "article" },
-  12: { vocab: "arts & culture",              grammar: "Reporting verbs: suggest/recommend/deny/accuse + structures",        podcast: "Intelligence Squared",    podcastQ: "intelligence squared arts culture debate",        writing: "report" },
-  13: { vocab: "society & relationships",     grammar: "Mixed conditionals + wish/if only/it's (high) time",                podcast: "BBC Global News",         podcastQ: "bbc global news podcast society",                 writing: "essay" },
-  14: { vocab: "society & relationships",     grammar: "Ellipsis and substitution (so/not, do/did, one/ones)",              podcast: "The Economist",           podcastQ: "the economist podcast society values",            writing: "proposal" },
-  15: { vocab: "crime & justice",             grammar: "Fronting: On no account…, Under no circumstances…, Not until…",    podcast: "BBC In Our Time",         podcastQ: "bbc in our time crime law justice",               writing: "letter" },
-  16: { vocab: "crime & justice",             grammar: "Modal perfects: should/must/can't/needn't have + perfect infinitive",podcast: "Intelligence Squared",    podcastQ: "intelligence squared crime justice punishment",    writing: "article" },
-  17: { vocab: "travel & global cultures",    grammar: "Full UoE Parts 1-4 mixtos — drilling cronometrado",                podcast: "Stuff You Should Know",   podcastQ: "stuff you should know podcast travel culture",    writing: "report" },
-  18: { vocab: "travel & global cultures",    grammar: "KWT speed: máx 60 sec/pregunta — todos los patrones",               podcast: "TED Talk",                podcastQ: "TED talk travel culture perspectives identity",   writing: "review" },
-  19: { vocab: "science & innovation",        grammar: "Parts 1-4 full mock — target: 0 errores",                          podcast: "Science Weekly",          podcastQ: "guardian science weekly podcast 2025",            writing: "essay" },
-  20: { vocab: "science & innovation",        grammar: "Parts 1-4 en condiciones estrictas de examen",                     podcast: "TED Talk",                podcastQ: "TED talk science innovation artificial intelligence",writing: "proposal"},
-  21: { vocab: "global economy (C2)",         grammar: "Nominalization: the rise of, a tendency to, an awareness of",      podcast: "The Economist",           podcastQ: "the economist podcast economy finance 2025",       writing: "essay" },
-  22: { vocab: "global economy (C2)",         grammar: "Complex concession: Much as…, Albeit, Notwithstanding, For all…",  podcast: "FT News Briefing",        podcastQ: "financial times news briefing podcast",           writing: "report" },
-  23: { vocab: "psychology & philosophy (C2)",grammar: "Discourse cohesion: lexical chains, referencing, substitution",    podcast: "Philosophy Bites",        podcastQ: "philosophy bites podcast mind consciousness",      writing: "article" },
-  24: { vocab: "psychology & philosophy (C2)",grammar: "Register shift: formal↔informal — transformaciones totales",       podcast: "BBC In Our Time",         podcastQ: "bbc in our time philosophy mind free will",        writing: "letter" },
-  25: { vocab: "integrated review",           grammar: "CAE Parts 1-4 — nivel C2, target 0-1 errores",                    podcast: "BBC Global News",         podcastQ: "bbc global news podcast",                         writing: "essay" },
-  26: { vocab: "integrated review",           grammar: "KWT al máximo — todos los patrones en velocidad",                  podcast: "Intelligence Squared",    podcastQ: "intelligence squared debate full episode",         writing: "report" },
-  27: { vocab: "light review",                grammar: "Repaso visual — sin ejercicios nuevos",                            podcast: "cualquiera favorito",     podcastQ: "english podcast entertaining",                    writing: "any" },
+  1:  { vocab: "work & career",               grammar: "Word Formation: sufijos nominales y adjetivales (-tion/-ment/-ness/-ful/-less)", podcast: "BBC 6 Minute English",     podcastQ: "bbc 6 minute english career work 2024",            writing: "essay" },
+  2:  { vocab: "technology & communication",  grammar: "Open Cloze: preposiciones en frases fijas (rely on, result in…) + linkers (although, whereas)", podcast: "TED Talk", podcastQ: "TED talk technology future innovation transcript", writing: "essay" },
+  3:  { vocab: "environment & sustainability",grammar: "KWT: causative have/get something done + passive avanzado + comparisons", podcast: "BBC 6 Minute English",     podcastQ: "bbc 6 minute english environment climate change",  writing: "essay" },
+  4:  { vocab: "health & wellbeing",          grammar: "Multiple Choice Cloze: collocations de salud + idioms y set phrases del CAE", podcast: "BBC The English We Speak", podcastQ: "bbc the english we speak health body idioms",      writing: "report" },
+  5:  { vocab: "education & society",         grammar: "Inversions: Not only…, Rarely…, Hardly…when, No sooner…than",       podcast: "TED Talk",                 podcastQ: "TED talk education school future learning",        writing: "proposal" },
+  6:  { vocab: "arts & culture",              grammar: "Cleft sentences (It was X who… / What I need is…) + participle clauses", podcast: "Intelligence Squared",     podcastQ: "intelligence squared arts culture debate",         writing: "review" },
+  7:  { vocab: "society & relationships",     grammar: "Reporting verbs (suggest/deny/accuse) + ellipsis and substitution", podcast: "The Economist",            podcastQ: "the economist podcast society values",             writing: "letter" },
+  8:  { vocab: "crime & justice",             grammar: "Mixed conditionals + wish/if only/it's time + modal perfects (should/must have)", podcast: "BBC In Our Time", podcastQ: "bbc in our time crime law justice",                writing: "article" },
+  9:  { vocab: "travel & global cultures",    grammar: "Full UoE Parts 1-4 mixto — drilling cronometrado (todos los patrones)", podcast: "Stuff You Should Know",    podcastQ: "stuff you should know podcast travel culture",     writing: "report" },
+  10: { vocab: "science & innovation",        grammar: "UoE speed: máx 60 sec/pregunta — repaso de todos los patrones débiles", podcast: "Science Weekly",           podcastQ: "guardian science weekly podcast 2025",             writing: "review" },
+  11: { vocab: "integrated review",           grammar: "Banco de errores: retest dirigido de patrones que siguen fallando", podcast: "BBC Global News",          podcastQ: "bbc global news podcast society",                  writing: "essay" },
+  12: { vocab: "exam simulation",             grammar: "Mock completo — objetivo 0 errores en UoE",                        podcast: "TED Talk",                 podcastQ: "TED talk science innovation artificial intelligence", writing: "proposal" },
+  13: { vocab: "exam simulation",             grammar: "Mock completo — timing exacto por parte",                          podcast: "The Economist",            podcastQ: "the economist podcast economy finance 2025",       writing: "letter" },
+  14: { vocab: "exam simulation",             grammar: "Mock completo — ajuste fino final",                                podcast: "cualquiera favorito",      podcastQ: "english podcast entertaining",                     writing: "article" },
+  15: { vocab: "light review",                grammar: "Repaso visual — sin ejercicios nuevos",                            podcast: "cualquiera favorito",      podcastQ: "english podcast entertaining",                     writing: "any" },
 };
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -94,11 +80,11 @@ function phase1(w) {
   return [
     mk("Lunes", [
       t(
-        `UoE: ${wd.grammar} — 20 ejercicios (40 min)`,
+        `UoE: ${wd.grammar} — 25 ejercicios (45 min)`,
         "uoe", "Active Recall — sin mirar reglas primero",
         [
           `Inicia sesión en Claude con el prompt de abajo`,
-          `Resuelve los 20 ejercicios que Claude te proponga SIN mirar notas`,
+          `Resuelve los 25 ejercicios que Claude te proponga SIN mirar notas`,
           `Cada error → crea tarjeta SR: [forma errónea] → [correcta + regla]`,
         ],
         C.grammar(wd.grammar, wd.vocab)
@@ -114,7 +100,7 @@ function phase1(w) {
         C.speaking(wd.vocab)
       ),
       t(
-        `Vocab: 12 collocations de "${wd.vocab}" + oraciones propias (20 min)`,
+        `Vocab: 12 collocations de "${wd.vocab}" + oraciones propias (25 min)`,
         "uoe", "Elaborative Interrogation — crea contexto propio",
         [
           `Pide las 12 collocations a Claude (prompt abajo)`,
@@ -123,7 +109,27 @@ function phase1(w) {
         ],
         C.vocab(wd.vocab)
       ),
-      t("SR: Tarjetas pendientes del día (10 min)", "sr", "Spaced Repetition SM-2",
+      t(
+        `Speaking con Claude: debate "${wd.vocab}" (30 min)`,
+        "speaking", "Pushed Output — fuerza vocabulario nuevo",
+        [
+          `Debate 20 min usando mínimo 5 collocations de hoy`,
+          `Al terminar: pide a Claude qué palabras repetiste más`,
+          `Anota 3 alternativas C1 que Claude sugiera`,
+        ],
+        C.debate(wd.vocab)
+      ),
+      t(
+        `UoE extra: Open cloze ×1 + razona cada gap en voz alta (30 min)`,
+        "uoe", "Elaborative Interrogation — razona cada respuesta",
+        [
+          `1 open cloze completo (8 gaps) — sin ayuda`,
+          `Para cada gap di en voz alta el tipo (preposición / linker / pronombre…)`,
+          `Errores → Banco de Errores + tarjeta SR`,
+        ],
+        C.google(`CAE open cloze practice test site:flo-joe.co.uk OR site:cambridgeenglish.org`)
+      ),
+      t("SR: Tarjetas pendientes del día (15 min)", "sr", "Spaced Repetition SM-2",
         [`Haz TODAS las tarjetas que salgan hoy — sé honesto con la calificación`], ""),
     ]),
     mk("Martes", [
@@ -138,27 +144,42 @@ function phase1(w) {
         C.podcast(wd.podcast, wd.podcastQ)
       ),
       t(
-        `UoE: ${wd.grammar} — KWT ×12 (30 min)`,
+        `UoE: ${wd.grammar} — KWT ×15 (35 min)`,
         "uoe", "Interleaving — mezcla patrones distintos",
         [
-          `12 transformaciones con el patrón de esta semana`,
+          `15 transformaciones con el patrón de esta semana`,
           `Máximo 90 seg por pregunta — simula el tiempo del examen`,
           `Cada error: di en voz alta POR QUÉ la respuesta correcta es esa`,
         ],
         C.grammar(wd.grammar, wd.vocab)
       ),
       t(
-        `Speaking con Claude: debate "${wd.vocab}" (25 min)`,
-        "speaking", "Pushed Output — fuerza vocabulario nuevo",
+        `Speaking: Long turn 1 min ×3 — temas variados (30 min)`,
+        "speaking", "Testing Effect — formato examen real",
         [
-          `Debate 15 min usando mínimo 5 collocations del lunes`,
-          `Al terminar: pide a Claude qué palabras repetiste más`,
-          `Anota 3 alternativas C1 que Claude sugiera`,
+          `Pide a Claude 3 prompts distintos de Part 2`,
+          `1 min cada uno sin parar — foco: linking phrases y especulación`,
+          `Transcribe el que salió peor → ¿cuántas expresiones C1 usaste?`,
         ],
-        C.debate(wd.vocab)
+        `💬 Claude: "Give me 3 different CAE Part 2 photo tasks (one at a time). I'll respond to each with a 1-minute spoken answer (I'll write it). After each, tell me: linking phrases used, speculation language, and one thing to improve."`
       ),
-      t("SR: 5 tarjetas nuevas desde errores de hoy (10 min)", "sr", "Error→SR pipeline",
+      t(
+        `Reading: 1 texto C1 sobre "${wd.vocab}" — extrae 10 expresiones (30 min)`,
+        "reading", "Noticing — activa el filtro de input",
+        [
+          `Busca 1 artículo C1 sobre "${wd.vocab}" (The Guardian / BBC / The Economist)`,
+          `Lee activamente: extrae 10 expresiones que TÚ no usarías espontáneamente`,
+          `Guárdalas en el Log de Lectura — botón "→ SR" para las mejores`,
+        ],
+        C.google(`"${wd.vocab}" site:theguardian.com OR site:bbc.com/news`)
+      ),
+      t("SR: 5 tarjetas nuevas desde errores de hoy (15 min)", "sr", "Error→SR pipeline",
         [`Convierte errores del día en tarjetas SR desde el Banco de Errores`], ""),
+      t(
+        `Speaking: Resumen oral 2 min del texto leído (15 min)`,
+        "speaking", "Input→Output — reusa el vocabulario nuevo",
+        [`Graba 2 min resumiendo el texto, forzando 5 de las expresiones extraídas`], ""
+      ),
     ]),
     mk("Miércoles", [
       t(
@@ -172,17 +193,17 @@ function phase1(w) {
         C.writing("CAE essay (Part 1, for/against)", wd.vocab)
       ),
       t(
-        `UoE: Open cloze ×2 + analiza POR QUÉ cada gap (25 min)`,
+        `UoE: Open cloze ×2 + multiple-choice cloze ×1 (35 min)`,
         "uoe", "Elaborative Interrogation — razona cada respuesta",
         [
-          `Resuelve 2 open cloze completos (16 gaps) — sin ayuda`,
-          `Para cada gap: di en voz alta el tipo (preposición / linker / pronombre…)`,
+          `2 open cloze (16 gaps) + 1 MCQ cloze — sin ayuda`,
+          `Para cada gap di en voz alta el tipo (preposición / linker / collocation…)`,
           `Errores → Banco de Errores + tarjeta SR`,
         ],
-        C.google(`CAE open cloze practice test site:flo-joe.co.uk OR site:cambridgeenglish.org`)
+        C.google(`CAE open cloze and multiple choice cloze practice test site:flo-joe.co.uk`)
       ),
       t(
-        `Grammar: ${wd.grammar} — escribe 5 oraciones propias (20 min)`,
+        `Grammar: ${wd.grammar} — escribe 5 oraciones propias (25 min)`,
         "uoe", "Explicit instruction → producción inmediata",
         [
           `5 oraciones propias usando el patrón de esta semana`,
@@ -191,29 +212,56 @@ function phase1(w) {
         ],
         `💬 Claude: "I've written 5 sentences using '${wd.grammar}'. Topic: '${wd.vocab}'. Correct each one and rewrite it at C1 level, explaining what you changed."`
       ),
-      t("SR: Phrasal verbs del tema (10 min)", "sr", "Spaced Repetition",
+      t(
+        `Speaking: Describe & compare (Part 2) ×2 (30 min)`,
+        "speaking", "Pushed Output — formato Part 2",
+        [
+          `2 tareas describe & compare — 1 min cada una`,
+          `Foco: lenguaje de especulación y comparación`,
+        ],
+        C.speaking(wd.vocab)
+      ),
+      t("SR: Phrasal verbs + collocations del tema (20 min)", "sr", "Spaced Repetition",
         [`Revisa pendientes + añade 3 phrasal verbs relacionados con "${wd.vocab}"`], ""),
+      t(
+        `Writing: Reescribir intro + conclusión del essay con el feedback (20 min)`,
+        "writing", "Error Analysis — elevar el nivel",
+        [
+          `Lee el feedback de Claude del essay de hoy`,
+          `Reescribe la intro y la conclusión aplicando las sugerencias`,
+        ],
+        C.writing("revised CAE essay", wd.vocab)
+      ),
     ]),
     mk("Jueves", [
       t(
-        `Reading: 2 textos C1 sobre "${wd.vocab}" — extrae 10 expresiones (35 min)`,
-        "reading", "Noticing — activa el filtro de input",
+        `UoE: Mini-mock Parts 1-4 cronometrado (45 min)`,
+        "uoe", "Testing Effect — condiciones reales",
         [
-          `Busca 2 artículos C1/C2 sobre "${wd.vocab}" (The Guardian / BBC / The Economist)`,
-          `Lee activamente: extrae 10 expresiones que TÚ no usarías espontáneamente`,
-          `Guárdalas en el Log de Lectura — botón "→ SR" para las mejores`,
+          `Parts 1-4 completas sin ayuda — timer estricto`,
+          `Auto-corrección: clasifica cada error por tipo (word form / preposition / collocation…)`,
+          `Score de esta semana vs semana pasada — ¿cuántos errores menos?`,
         ],
-        C.google(`"${wd.vocab}" site:theguardian.com OR site:bbc.com/news`)
+        C.google(`CAE Use of English Parts 1-4 full practice test PDF`)
       ),
       t(
-        `Speaking: Long turn 1 min ×3 — temas variados (30 min)`,
-        "speaking", "Testing Effect — formato examen real",
+        `Listening: ${wd.podcast} + resumen escrito 100 palabras de memoria (35 min)`,
+        "listening", "Input→Output integrado",
         [
-          `Pide a Claude 3 prompts distintos de Part 2 con foto situations`,
-          `1 min cada uno sin parar — foco: linking phrases y especulación`,
-          `Transcribe el que salió peor → ¿cuántas expresiones C1 usaste?`,
+          `Escucha el podcast sobre "${wd.vocab}" sin subtítulos`,
+          `Escribe un resumen de 100 palabras solo de memoria`,
+          `Compara con el transcript — ¿qué información perdiste?`,
         ],
-        `💬 Claude: "Give me 3 different CAE Part 2 photo tasks (one at a time). I'll respond to each with a 1-minute spoken answer (I'll write it). After each, tell me: linking phrases used, speculation language, and one thing to improve."`
+        C.podcast(wd.podcast, wd.podcastQ)
+      ),
+      t(
+        `Speaking: Long turn 1 min ×3 + feedback de muletillas (30 min)`,
+        "speaking", "Output — identifica repeticiones",
+        [
+          `3 temas distintos — 1 min cada uno sin parar`,
+          `Pide a Claude las muletillas que más repites (basically, like, you know…)`,
+        ],
+        `💬 Claude: "Give me 3 different CAE Part 2 prompts, one at a time. I'll write my spoken answers. After all 3, identify any filler words or phrases I overused."`
       ),
       t(
         `Shadowing: 10-15 min — prosodia y ritmo (25 min)`,
@@ -225,40 +273,51 @@ function phase1(w) {
         ],
         C.shadow(`${wd.vocab} BBC Learning English OR TED Talk transcript`)
       ),
-      t("SR: Collocations de la semana (10 min)", "sr", "Spaced Repetition",
-        [`Repasa las collocations del lunes y martes`], ""),
+      t(
+        `Vocab: 8 idioms / set phrases de "${wd.vocab}" (20 min)`,
+        "uoe", "Elaborative Interrogation — set phrases del CAE",
+        [`Pide 8 idioms del tema, escribe 1 oración con cada uno; difíciles → SR`],
+        C.vocab(wd.vocab)
+      ),
+      t("SR: Tarjetas falladas 2+ veces (15 min)", "sr", "Spaced Repetition — foco en lo débil",
+        [`Repasa las tarjetas que has fallado más de 2 veces`], ""),
     ]),
     mk("Viernes", [
       t(
-        `UoE: Mini-mock Parts 1-4 cronometrado (45 min)`,
+        `UoE: Mock parcial Parts 1-4 + análisis por tipo de error (50 min)`,
         "uoe", "Testing Effect — condiciones reales",
         [
-          `Parts 1-4 completas sin ayuda — timer estricto (45 min)`,
-          `Auto-corrección: clasifica cada error por tipo (word form / preposition / collocation…)`,
-          `Score de esta semana vs semana pasada — ¿cuántos errores menos?`,
+          `Parts 1-4 completas sin ayuda — timer estricto`,
+          `Clasifica cada error por tipo (word form / preposition / collocation / KWT)`,
+          `¿Hay un patrón repetido? → sesión dedicada el sábado`,
         ],
         C.google(`CAE Use of English Parts 1-4 full practice test PDF`)
       ),
       t(
-        `Writing: Reescribir intro + conclusión del essay del miércoles (20 min)`,
+        `Writing: Reescribe el essay de la semana al máximo nivel (30 min)`,
         "writing", "Error Analysis — elevar el nivel",
         [
-          `Lee el feedback de Claude del miércoles`,
-          `Reescribe la intro y la conclusión aplicando las sugerencias`,
+          `Toma el essay del miércoles y reescríbelo entero aplicando todo el feedback`,
           `v1 vs v2: cuenta cuántas estructuras C1 nuevas añadiste`,
         ],
         C.writing("revised CAE essay", wd.vocab)
       ),
       t(
-        `Speaking: Resumen oral 5 min de la semana (15 min)`,
-        "speaking", "Output + Metacognición",
+        `Speaking: Mock Part 1 (interview) + Part 2 con Claude (35 min)`,
+        "speaking", "Testing Effect — formato examen",
         [
-          `Habla 5 min sobre qué aprendiste — vocabulario, gramática, expresiones`,
-          `Fuerza: usa el vocabulario de "${wd.vocab}" en el resumen`,
-        ], ""
+          `Part 1: 5 preguntas de entrevista. Part 2: 1 long turn con timer de 1 min`,
+          `Pide feedback breve de fluidez, gramática y vocabulario`,
+        ],
+        `💬 Claude: "Be a CAE Speaking examiner. Ask me 5 Part 1 interview questions, then give me a Part 2 task (1 min). After each, brief feedback on fluency, grammar, vocabulary."`
       ),
       t(
-        `Revisión semanal: errores + plan semana siguiente (20 min)`,
+        `Vocab review: ¿cuántas collocations recuerdas sin mirar? (20 min)`,
+        "uoe", "Active Recall — autoevaluación",
+        [`Recita de memoria las collocations del tema; las olvidadas → vuelven a SR`], ""
+      ),
+      t(
+        `Revisión semanal: errores + plan semana siguiente (25 min)`,
         "review", "Metacognición",
         [
           `Banco de Errores: marca como "Dominado" los que ya controlas`,
@@ -266,6 +325,29 @@ function phase1(w) {
           `Define 2 objetivos específicos para la próxima semana`,
         ], ""
       ),
+    ]),
+    mk("Sábado", [
+      t(
+        `UoE: 30 KWT mixtas de toda la semana — cronometrado (45 min)`,
+        "uoe", "Testing Effect — consolidación bajo presión",
+        [
+          `30 transformaciones mezclando todos los patrones de la semana`,
+          `Máx 90 seg por pregunta — sin mirar notas`,
+          `Errores → tarjeta SR el mismo día`,
+        ],
+        C.grammar(wd.grammar, wd.vocab)
+      ),
+      t(
+        `Speaking: conversación libre 20 min con Claude (35 min)`,
+        "speaking", "Fluency sin presión + feedback final",
+        [
+          `Habla 20 min sobre temas que disfrutes — sin corrección en vivo`,
+          `Al terminar: pide a Claude tus 3 errores más significativos`,
+        ],
+        `💬 Claude: "Let's have a relaxed 20-minute conversation in English about a topic I enjoy. Don't correct me during the chat. Afterwards, give me feedback on just the 3 most significant language issues."`
+      ),
+      t("SR: backlog completo + crea 10 tarjetas de lo aprendido (40 min)", "sr", "Spaced Repetition — consolidar la semana",
+        [`Haz el backlog completo, luego crea 10 tarjetas de las mejores expresiones de la semana`], ""),
     ]),
   ];
 }
@@ -287,7 +369,7 @@ function phase2(w) {
         C.writing(`CAE ${wType}`, wd.vocab)
       ),
       t(
-        `UoE: ${wd.grammar} — 20 ejercicios (30 min)`,
+        `UoE: ${wd.grammar} — 20 ejercicios (35 min)`,
         "uoe", "Interleaving — mezcla Parts 1-4",
         [
           `Sesión en Claude: enfoque en "${wd.grammar}"`,
@@ -297,7 +379,7 @@ function phase2(w) {
         C.grammar(wd.grammar, wd.vocab)
       ),
       t(
-        `Listening: ${wd.podcast} — "${wd.vocab}" (25 min)`,
+        `Listening: ${wd.podcast} — predice antes de la 2ª escucha (30 min)`,
         "listening", "Active Recall — predice antes de segunda escucha",
         [
           `1ª escucha: predice las respuestas antes de escuchar de nuevo`,
@@ -306,7 +388,23 @@ function phase2(w) {
         ],
         C.podcast(wd.podcast, wd.podcastQ)
       ),
-      t("SR: Errores de writing → tarjetas (10 min)", "sr", "Error→SR pipeline",
+      t(
+        `Speaking: Collaborative task CAE Part 3 + discussion (30 min)`,
+        "speaking", "Pushed Output — negocia y persuade",
+        [
+          `Pide a Claude un Part 3 task sobre "${wd.vocab}"`,
+          `Negocia: argumenta, acepta parcialmente, redirige`,
+          `Feedback: ¿turn-taking? ¿negotiation phrases?`,
+        ],
+        `💬 Claude: "Be my partner for CAE Speaking Part 3 about '${wd.vocab}'. Give me the task prompt, then we discuss (I'll write my turns). Feedback on: turn-taking, negotiation phrases, vocabulary range, fluency."`
+      ),
+      t(
+        `Reading: 1 texto C1 sobre "${wd.vocab}" — extrae 8 expresiones (25 min)`,
+        "reading", "Noticing",
+        [`Lee 1 artículo C1, extrae 8 expresiones → Log de Lectura → SR`],
+        C.google(`"${wd.vocab}" site:theguardian.com OR site:bbc.com/news`)
+      ),
+      t("SR: Errores de writing → tarjetas (15 min)", "sr", "Error→SR pipeline",
         [`Convierte los errores del essay de hoy en tarjetas SR`], ""),
     ]),
     mk("Martes", [
@@ -321,17 +419,16 @@ function phase2(w) {
         C.google(`CAE Listening Parts 3 4 practice test site:cambridgeenglish.org OR site:flo-joe.co.uk`)
       ),
       t(
-        `Speaking: Collaborative task CAE Part 3 + discussion (25 min)`,
+        `Speaking: Collaborative Part 3 + discussion Part 4 (30 min)`,
         "speaking", "Pushed Output — negocia y persuade",
         [
-          `Pide a Claude un Part 3 task sobre "${wd.vocab}"`,
-          `Negocia con Claude: argumenta, acepta parcialmente, redirige`,
-          `Pide feedback: ¿interrumpiste bien? ¿usaste negotiation phrases?`,
+          `Part 3 collaborative + Part 4 discussion sobre "${wd.vocab}"`,
+          `Foco: justificar opiniones y desarrollar respuestas`,
         ],
-        `💬 Claude: "Be my partner for CAE Speaking Part 3 about '${wd.vocab}'. Give me the task prompt, then we discuss together (I'll write my turns). Afterwards, give me feedback on: turn-taking, negotiation phrases, vocabulary range, and fluency."`
+        `💬 Claude: "Run CAE Speaking Part 3 (collaborative) then Part 4 (discussion) about '${wd.vocab}'. I'll write my turns. Feedback on developing answers and justifying opinions."`
       ),
       t(
-        `UoE: ${wd.grammar} — KWT ×15 (25 min)`,
+        `UoE: ${wd.grammar} — KWT ×15 (30 min)`,
         "uoe", "Active Recall — máx 90 seg cada una",
         [
           `15 transformaciones del patrón "${wd.grammar}"`,
@@ -340,32 +437,47 @@ function phase2(w) {
         ],
         C.grammar(wd.grammar, wd.vocab)
       ),
-      t("SR: Academic vocabulary del tema (10 min)", "sr", "Spaced Repetition",
-        [`Revisa pendientes + añade vocabulary académico del tema "${wd.vocab}"`], ""),
+      t(
+        `Writing: Planifica un 2º formato — outline detallado (30 min)`,
+        "writing", "Planning — estructura antes de escribir",
+        [
+          `Elige un formato distinto al del lunes (Report→Review / Proposal→Letter…)`,
+          `Escribe el outline: propósito, párrafos, conectores, 4 collocations a usar`,
+        ],
+        C.writing(`second CAE Part 2 format outline`, wd.vocab)
+      ),
+      t(
+        `Vocab académico del tema "${wd.vocab}" (25 min)`,
+        "uoe", "Elaborative Interrogation",
+        [`12 collocations académicas + 1 oración propia con cada una; difíciles → SR`],
+        C.vocab(wd.vocab)
+      ),
+      t("SR: Academic vocabulary del tema (15 min)", "sr", "Spaced Repetition",
+        [`Revisa pendientes + añade el vocabulario académico de hoy`], ""),
     ]),
     mk("Miércoles", [
       t(
         `Writing: CAE Part 2 diferente — "${wd.vocab}" (45 min)`,
         "writing", "Output — ciclar todos los formatos",
         [
-          `Elige un formato distinto al del lunes (Report→Review / Proposal→Letter…)`,
+          `Escribe el 2º formato planificado el martes`,
           `Foco de hoy: Organization — párrafos claros, conectores apropiados`,
           `Compara con el del lunes: ¿cuál tiene mejor Organization score?`,
         ],
         C.writing(`second CAE Part 2 format`, wd.vocab)
       ),
       t(
-        `Grammar avanzada: ${wd.grammar} — 5 oraciones originales (25 min)`,
+        `Grammar avanzada: ${wd.grammar} — 5 oraciones originales (30 min)`,
         "uoe", "Explicit → producción con nivel",
         [
           `Escribe 5 oraciones originales usando "${wd.grammar}"`,
           `Contexto: "${wd.vocab}" — que suenen a texto real del CAE`,
-          `Claude las evalúa y muestra cómo sonarían en un C2`,
+          `Claude las evalúa y muestra una versión C1 superior de cada una`,
         ],
-        `💬 Claude: "I've written 5 sentences using '${wd.grammar}'. Topic: '${wd.vocab}'. For each: (1) is it grammatically correct? (2) how would a C2 speaker improve it? Show the upgrade."`
+        `💬 Claude: "I've written 5 sentences using '${wd.grammar}'. Topic: '${wd.vocab}'. For each: (1) is it grammatically correct? (2) how would a strong C1 speaker improve it? Show the upgrade."`
       ),
       t(
-        `Vocab: 12 collocations + 5 phrasal verbs de "${wd.vocab}" (20 min)`,
+        `Vocab: 12 collocations + 5 phrasal verbs de "${wd.vocab}" (25 min)`,
         "uoe", "Elaborative Interrogation",
         [
           `Obtén collocations y phrasal verbs del tema (Claude o Google)`,
@@ -374,7 +486,19 @@ function phase2(w) {
         ],
         C.vocab(wd.vocab)
       ),
-      t("SR: Discourse markers y linkers (10 min)", "sr", "Spaced Repetition",
+      t(
+        `Speaking: 3 Long turns (1 min c/u) — temas variados (30 min)`,
+        "speaking", "Testing Effect — formato examen",
+        [`3 prompts de Part 2; foco en linking phrases y especulación`],
+        `💬 Claude: "Give me 3 different CAE Part 2 tasks, one at a time. After each, feedback on linking phrases and speculation language."`
+      ),
+      t(
+        `UoE: Open cloze ×2 + razona cada gap (30 min)`,
+        "uoe", "Elaborative Interrogation",
+        [`2 open cloze (16 gaps); di el tipo de cada gap; errores → SR`],
+        C.google(`CAE open cloze practice test site:flo-joe.co.uk OR site:cambridgeenglish.org`)
+      ),
+      t("SR: Discourse markers y linkers (20 min)", "sr", "Spaced Repetition",
         [`Revisa pendientes + añade linkers C1 que usaste esta semana`], ""),
     ]),
     mk("Jueves", [
@@ -389,7 +513,7 @@ function phase2(w) {
         C.podcast(wd.podcast, wd.podcastQ)
       ),
       t(
-        `Speaking: 3 Long turns grabados — 1 min cada uno (30 min)`,
+        `Speaking: 3 Long turns grabados + muletillas (35 min)`,
         "speaking", "Output — identifica muletillas y repeticiones",
         [
           `3 temas distintos — pide los prompts a Claude`,
@@ -399,7 +523,7 @@ function phase2(w) {
         `💬 Claude: "Give me 3 different CAE Part 2 photo prompts, one at a time. I'll write my spoken answers. After all 3, identify any filler words or phrases I overused across the three responses."`
       ),
       t(
-        `Shadowing: 10-15 min — nivel C1/C2 (25 min)`,
+        `Shadowing: 10-15 min — nivel C1 (30 min)`,
         "listening", "Shadowing avanzado",
         [
           `Busca un clip natural (no scripted) sobre "${wd.vocab}"`,
@@ -408,7 +532,19 @@ function phase2(w) {
         ],
         C.shadow(`${wd.vocab} documentary OR lecture English`)
       ),
-      t("SR: Errores recurrentes (10 min)", "sr", "Error→SR — patrones persistentes",
+      t(
+        `UoE: Multiple-choice cloze ×2 (30 min)`,
+        "uoe", "Active Recall — collocations y phrasal verbs",
+        [`2 MCQ cloze completos; cada error → Banco de Errores + SR`],
+        C.google(`CAE multiple choice cloze Part 1 practice test PDF`)
+      ),
+      t(
+        `Reading: 2 textos C1 sobre "${wd.vocab}" — 10 expresiones (30 min)`,
+        "reading", "Noticing",
+        [`Lee 2 textos C1, extrae 10 expresiones → Log de Lectura → SR`],
+        C.google(`"${wd.vocab}" site:theguardian.com OR site:economist.com`)
+      ),
+      t("SR: Errores recurrentes (15 min)", "sr", "Error→SR — patrones persistentes",
         [`Foco en las tarjetas que has fallado más de 2 veces`], ""),
     ]),
     mk("Viernes", [
@@ -423,23 +559,50 @@ function phase2(w) {
         C.google(`CAE Use of English full mock test PDF filetype:pdf Cambridge`)
       ),
       t(
-        `Análisis del mock: categoriza cada error (25 min)`,
+        `Análisis del mock: categoriza cada error (30 min)`,
         "review", "Error Analysis",
         [
           `Clasifica errores: collocation / word form / preposition / KWT pattern`,
-          `¿Hay un patrón? Si fallaste 3+ del mismo tipo → sesión extra esa semana`,
+          `¿Hay un patrón? Si fallaste 3+ del mismo tipo → sesión extra el sábado`,
           `Registra en Banco de Errores los nuevos`,
         ],
         `💬 Claude: "I got these answers wrong in my CAE mock: [lista tus errores]. Explain why each one is wrong, what rule I missed, and give me 3 similar exercises to practice that specific pattern."`
       ),
       t(
-        `Speaking: Reflexión oral 5 min + goals semana siguiente (15 min)`,
+        `Listening: 1 parte débil del mock — práctica dirigida (25 min)`,
+        "listening", "Deliberate Practice — solo lo débil",
+        [`Repite la parte de Listening donde más fallaste; analiza distractores`],
+        C.google(`CAE Listening practice ${wd.vocab} test`)
+      ),
+      t(
+        `Speaking: Reflexión oral 5 min + goals semana siguiente (20 min)`,
         "speaking", "Metacognición",
         [
           `¿Qué mejoró esta semana? ¿Qué sigue débil?`,
           `Establece 1 objetivo medible para la próxima semana`,
         ], ""
       ),
+      t("SR + Banco de errores: actualiza dominados (20 min)", "sr", "Spaced Repetition",
+        [`Haz pendientes y marca como dominados los errores que ya controlas`], ""),
+    ]),
+    mk("Sábado", [
+      t(
+        `Mock parcial: Reading + Listening cronometrado (60 min)`,
+        "review", "Testing Effect — secciones que menos practicaste entre semana",
+        [
+          `1 Reading completo + 1 Listening completo con timer oficial`,
+          `Corrige y categoriza cada error por tipo`,
+        ],
+        C.google(`CAE Reading and Listening practice test PDF with answers`)
+      ),
+      t(
+        `Análisis del mock con Claude (25 min)`,
+        "review", "Error Analysis",
+        [`Pega tus errores y pide patrones + 5 ejercicios dirigidos por tipo`],
+        `💬 Claude: "Here are my errors from a CAE Reading + Listening mock: [lista]. Identify patterns and give me 5 targeted exercises per error type."`
+      ),
+      t("SR: backlog + 8 tarjetas nuevas de la semana (35 min)", "sr", "Spaced Repetition",
+        [`Haz el backlog y añade 8 expresiones nuevas del Log de Lectura`], ""),
     ]),
   ];
 }
@@ -478,15 +641,24 @@ function phase3(w) {
         ],
         `💬 Claude: "Be a CAE Speaking examiner. Start with Part 1 interview questions (ask me 5 questions about myself, interests, future plans). Then give me a Part 2 task. After each section give me brief feedback on fluency, grammar, vocabulary."`
       ),
-      t("SR: Weak areas del mock de hoy (10 min)", "sr", "Targeted SR",
-        [`Convierte los errores del mock en tarjetas SR`], ""),
+      t(
+        `UoE: dirigido a los 3 tipos de error del mock (30 min)`,
+        "uoe", "Deliberate Practice — solo lo débil",
+        [
+          `Trabaja solo los 3 tipos de error más frecuentes del mock de hoy`,
+          `15-20 ejercicios dirigidos — ¿bajó la tasa de error?`,
+        ],
+        C.grammar(wd.grammar, wd.vocab)
+      ),
+      t("SR: Weak areas del mock de hoy (20 min)", "sr", "Targeted SR",
+        [`Convierte los errores del mock en tarjetas SR y haz los pendientes`], ""),
     ]),
     mk("Martes", [
       t(
         `Writing: 2 tasks CAE bajo presión — timing exacto (50 min)`,
         "writing", "Testing Effect — condiciones de examen",
         [
-          `Part 1 essay (45 min) + Part 2 (45 min) — hoy solo tienes 50 min total, elige 1 o divídelo`,
+          `Part 1 essay + Part 2 — divide los 50 min o elige uno y cronométralo`,
           `Enfoca en Communicative Achievement: ¿cumples el propósito del texto?`,
           `Claude corrección con rúbrica oficial`,
         ],
@@ -503,20 +675,26 @@ function phase3(w) {
         C.google(`CAE Listening full test Parts 1 2 3 4 with audio Cambridge`)
       ),
       t(
-        `UoE: ${wd.grammar} — top 15 error patterns dirigido (15 min)`,
+        `UoE: ${wd.grammar} — top error patterns dirigido (30 min)`,
         "uoe", "Deliberate Practice — solo lo débil",
         [
           `Solo ejercicios del tipo "${wd.grammar}" que te sigue costando`,
-          `15 ejercicios rápidos — comprueba si mejoró vs semana pasada`,
+          `Ejercicios rápidos — comprueba si mejoró vs semana pasada`,
         ],
         C.grammar(wd.grammar, wd.vocab)
       ),
-      t("SR: Consolidación semana (10 min)", "sr", "Spaced Repetition",
+      t(
+        `Speaking: Collaborative Part 3 + discussion (30 min)`,
+        "speaking", "Pushed Output — negocia y desarrolla",
+        [`Part 3 + Part 4 sobre "${wd.vocab}"; feedback de turn-taking y desarrollo`],
+        `💬 Claude: "Run CAE Speaking Part 3 (collaborative) and Part 4 (discussion) about '${wd.vocab}'. I'll write my turns. Feedback on turn-taking, negotiation, and developing answers."`
+      ),
+      t("SR: Consolidación semana (20 min)", "sr", "Spaced Repetition",
         [`Revisa todas las tarjetas pendientes`], ""),
     ]),
     mk("Miércoles", [
       t(
-        `Speaking: Mock Speaking completo CAE (4 parts) grabado (25 min)`,
+        `Speaking: Mock Speaking completo CAE (4 parts) grabado (30 min)`,
         "speaking", "Output — criterios oficiales CAE",
         [
           `Parts 1→4 simuladas con Claude: interview, long turn, collaborative, discussion`,
@@ -526,17 +704,17 @@ function phase3(w) {
         `💬 Claude: "Simulate a full CAE Speaking exam (Parts 1-4). I'll write all my answers as if speaking. Part 1: ask me 4 personal questions. Part 2: give me a photo task (1 min). Part 3: collaborative task (2 min). Part 4: follow-up discussion (2 min). Then give me an overall assessment for each part."`
       ),
       t(
-        `UoE: ${wd.grammar} — retest 20 patrones más frecuentes (30 min)`,
+        `UoE: ${wd.grammar} — retest 25 patrones más frecuentes (40 min)`,
         "uoe", "Active Recall total — ¿qué sigue fallando?",
         [
-          `20 ejercicios mixtos — todos los patrones de las semanas anteriores`,
+          `25 ejercicios mixtos — todos los patrones de las semanas anteriores`,
           `Sin ayuda — compara score con el mock del lunes`,
           `¿Qué patrón sigue siendo el más débil?`,
         ],
         C.google(`CAE Use of English Parts 1-4 mixed practice exercises`)
       ),
       t(
-        `Writing: Autocorrección con rúbrica oficial (25 min)`,
+        `Writing: Autocorrección con rúbrica oficial (30 min)`,
         "writing", "Error Analysis — interioriza los criterios",
         [
           `Toma un essay de la semana pasada y evalúatelo tú mismo (0-5 cada criterio)`,
@@ -545,6 +723,14 @@ function phase3(w) {
         ],
         C.writing(`self-assessed CAE essay`, wd.vocab)
       ),
+      t(
+        `Listening: 1 parte débil del mock — práctica dirigida (30 min)`,
+        "listening", "Deliberate Practice — solo lo débil",
+        [`Repite la parte de Listening donde más fallaste; analiza los distractores`],
+        C.google(`CAE Listening Part practice test with answers`)
+      ),
+      t("SR + Banco de errores: actualiza dominados (30 min)", "sr", "Spaced Repetition",
+        [`Haz pendientes y marca como dominados los errores que ya controlas`], ""),
     ]),
     mk("Jueves", [
       t(
@@ -557,6 +743,8 @@ function phase3(w) {
         ],
         C.google(`CAE Cambridge C1 Advanced full mock exam PDF 2024 2025`)
       ),
+      t("SR: pasada ligera tras el mock (15 min)", "sr", "Spaced Repetition",
+        [`Haz solo las tarjetas pendientes — no crees nuevas hoy, descansa la mente`], ""),
     ]),
     mk("Viernes", [
       t(
@@ -570,22 +758,50 @@ function phase3(w) {
         `💬 Claude: "I completed a full CAE mock. Here are my errors by section: [lista]. (1) Identify patterns. (2) Prioritize what to work on this week. (3) Give me 5 specific targeted exercises."`
       ),
       t(
-        `Speaking: Practica solo las partes débiles (20 min)`,
+        `Speaking: Practica solo las partes débiles (30 min)`,
         "speaking", "Deliberate Practice — solo los puntos débiles",
         [
           `Identifica tu parte más débil del mock de ayer`,
-          `10 min de práctica intensiva en esa parte específica`,
+          `Práctica intensiva en esa parte específica con 3 tasks`,
           `Pide feedback de Claude — ¿mejoró respecto a ayer?`,
         ],
         `💬 Claude: "I struggled most with CAE Speaking [Part X] in my mock. Give me 3 different tasks of that specific part and give me detailed feedback after each response I write."`
       ),
       t(
-        `Revisión semanal + score tracker (15 min)`,
+        `UoE / Writing: corrige los errores del mock con Claude (40 min)`,
+        "review", "Error Analysis — cierra las brechas del mock",
+        [
+          `Trabaja los errores de UoE y Writing del mock del jueves`,
+          `Por cada tipo: regla + 5 ejercicios dirigidos`,
+        ],
+        `💬 Claude: "From my CAE mock, here are my UoE and Writing errors: [lista]. For each, explain the rule and give me 5 targeted exercises."`
+      ),
+      t(
+        `Revisión semanal + score tracker (20 min)`,
         "review", "Metacognición",
         [
           `Registra el score del mock en el Tracker`,
           `¿Cuántos puntos ganaste vs la semana 1 del plan?`,
           `Define el objetivo de score para la próxima semana`,
+        ], ""
+      ),
+    ]),
+    mk("Sábado", [
+      t(
+        `Reading + UoE bajo presión — test diferente (75 min)`,
+        "review", "Overtraining ligero — segundo contacto con condiciones reales",
+        [
+          `Usa un test distinto al mock del jueves — timing oficial`,
+          `Compara el score con el del jueves: ¿consistente?`,
+        ],
+        C.google(`Cambridge CAE Reading Use of English full practice test 2025 PDF`)
+      ),
+      t(
+        `Análisis + SR de errores (45 min)`,
+        "sr", "Error→SR pipeline",
+        [
+          `Categoriza los errores del sábado y crea tarjetas SR`,
+          `Foco en los patrones que aparecieron también el jueves`,
         ], ""
       ),
     ]),
@@ -617,7 +833,16 @@ function phase4(w) {
         `💬 Claude: "I got these wrong in my CAE mock and I genuinely didn't know the answer: [lista]. Explain each one clearly and give me 3 exercises per error type."`
       ),
       t(
-        `Speaking: 2 Long turns + discussion grabados (20 min)`,
+        `Análisis rápido: triage de errores (25 min)`,
+        "review", "Triage — distingue errores evitables de difíciles",
+        [
+          `Clasifica: "evitable" (descuido, tiempo) vs "no sé" (vocab/gramática)`,
+          `Solo trabaja los "no sé" — los evitables se corrigen solos con práctica`,
+        ],
+        `💬 Claude: "I got these wrong in my CAE mock and I genuinely didn't know the answer: [lista]. Explain each clearly and give me 3 exercises per error type."`
+      ),
+      t(
+        `Speaking: 2 Long turns + discussion grabados (30 min)`,
         "speaking", "Fluidez y confianza bajo presión",
         [
           `2 Long turns distintos — 1 min cada uno sin parar`,
@@ -626,7 +851,16 @@ function phase4(w) {
         ],
         C.speaking(wd.vocab)
       ),
-      t("SR: Solo tarjetas que sigues fallando (10 min)", "sr", "SR selectivo — foco en zonas débiles",
+      t(
+        `Writing: 1 task con foco en LANGUAGE (40 min)`,
+        "writing", "Output — variedad de estructuras sin repetir vocab",
+        [
+          `1 task CAE cronometrado; hoy el objetivo es la riqueza de lenguaje`,
+          `Claude corrige con foco específico en el Language score`,
+        ],
+        C.writing(`CAE writing focus on Language range`, wd.vocab)
+      ),
+      t("SR: Solo tarjetas que sigues fallando (15 min)", "sr", "SR selectivo — foco en zonas débiles",
         [`Filtra tarjetas con calificación "No sé" repetida`], ""),
     ]),
     mk("Martes", [
@@ -634,7 +868,7 @@ function phase4(w) {
         `Full Writing mock — 2 tasks timing exacto (50 min)`,
         "writing", "Testing Effect — presión real",
         [
-          `Part 1 (essay) + Part 2 (formato variado) — 45 min cada uno`,
+          `Part 1 (essay) + Part 2 (formato variado) — timing exacto`,
           `Hoy enfoca en LANGUAGE: variedad de estructuras, sin repetir vocab`,
           `Corrección Claude con foco específico en Language score`,
         ],
@@ -651,54 +885,76 @@ function phase4(w) {
         C.google(`CAE C1 Advanced Listening test full audio mp3 OR youtube`)
       ),
       t(
-        `Revisión rápida: solo errores críticos (15 min)`,
-        "review", "Triage rápido",
+        `UoE: Banco de errores — retest top 30 (35 min)`,
+        "uoe", "Active Recall final — zero errors target",
         [
-          `Revisa los 5 errores más repetidos en los últimos mocks`,
-          `¿Mejoraron? Si no: sesión dedicada esta semana`,
-        ], ""
+          `Abre el Banco de Errores — pendientes más repetidos`,
+          `30 ejercicios de esos errores específicos`,
+          `¿Cuántos siguen fallando? ↓ = progreso`,
+        ],
+        C.grammar(wd.grammar, wd.vocab)
       ),
+      t(
+        `Speaking: Mock completo 4 parts con timer (25 min)`,
+        "speaking", "Simula los nervios — tiempo real",
+        [
+          `Mock de 4 partes en tiempo real — no pares`,
+          `Feedback general de Claude por parte`,
+        ],
+        `💬 Claude: "Run a timed CAE Speaking exam simulation. Parts 1-4, I'll write all responses. Be strict on timing. Afterwards give me a score estimate for each part (0-5) with brief feedback."`
+      ),
+      t("SR: Consolidación + errores críticos (20 min)", "sr", "Spaced Repetition",
+        [`Haz pendientes; revisa los 5 errores más repetidos de los últimos mocks`], ""),
     ]),
     mk("Miércoles", [
       t(
-        `Speaking: Mock completo 4 parts con timer (20 min)`,
+        `Speaking: Mock completo 4 parts con timer + feedback (30 min)`,
         "speaking", "Simula los nervios — tiempo real",
         [
           `Completa el mock de 4 partes en tiempo real — no pares`,
-          `Después: pide feedback general de Claude por parte`,
+          `Pide feedback general de Claude por parte`,
           `¿Cuál parte sientes menos segura? → practica ×2 esa parte`,
         ],
         `💬 Claude: "Run a timed CAE Speaking exam simulation. Parts 1-4, I'll write all responses. Be strict on timing. Afterwards give me a score estimate for each part (0-5) with brief feedback."`
       ),
       t(
-        `UoE: Banco de errores — retest top 30 (30 min)`,
+        `UoE: Banco de errores — retest TODO lo pendiente (35 min)`,
         "uoe", "Active Recall final — zero errors target",
         [
-          `Abre el Banco de Errores — pendientes más repetidos`,
-          `30 transformaciones/ejercicios de esos errores específicos`,
-          `¿Cuántos siguen fallando? ↓ = progreso, = = necesita más trabajo`,
+          `Retest de todos los errores pendientes del banco`,
+          `¿Cuántos siguen sin dominar? Esos son tu foco para el examen`,
         ],
         C.grammar(wd.grammar, wd.vocab)
       ),
       t(
-        `Writing: Lee tus mejores essays — interioriza tu nivel (20 min)`,
+        `Writing: Lee tus mejores essays — interioriza tu nivel (30 min)`,
         "writing", "Priming — activa tu mejor nivel antes de un mock",
         [
           `Lee los 3 essays/writings con mejor puntuación del Output Lab`,
           `Subraya 5 estructuras C1 que puedes replicar en el examen`,
-          `Menciones Claude: estos son mis mejores textos, ¿qué tienen en común?`,
         ],
-        `💬 Claude: "These are my best CAE writing samples [pega 2]: what structural and language patterns make them C1? Give me a list of 5 things I should replicate in every CAE writing task."`
+        `💬 Claude: "These are my best CAE writing samples [pega 2]: what structural and language patterns make them C1? Give me 5 things I should replicate in every CAE writing task."`
+      ),
+      t(
+        `Reading: Full Reading — velocidad + precisión por parte (35 min)`,
+        "reading", "Time management perfecto",
+        [
+          `CAE Reading Parts 1-4 con timing estricto por parte`,
+          `P1 (8 min), P2 (9 min), P3 (15 min), P4 (13 min) — ¿terminaste a tiempo?`,
+        ],
+        C.google(`CAE Reading Parts 1-4 practice test 2025 PDF`)
       ),
       t(
         `Shadowing: 10 min material rápido — processing speed (15 min)`,
         "listening", "Mantener el oído activo",
         [
-          `Busca un clip a velocidad normal (no TED lento) — noticias, podcast real`,
+          `Clip a velocidad normal (noticias, podcast real)`,
           `Shadowing sin guión: repite lo que escuchas`,
         ],
         C.shadow(`BBC News English podcast OR The Daily New York Times English`)
       ),
+      t("SR: tarjetas que sigues fallando (15 min)", "sr", "SR selectivo",
+        [`Solo las tarjetas con calificación "No sé" repetida`], ""),
     ]),
     mk("Jueves", [
       t(
@@ -711,20 +967,22 @@ function phase4(w) {
         ],
         C.google(`CAE Cambridge C1 Advanced complete mock exam 2024 2025`)
       ),
+      t("SR: pasada ligera tras el mock (15 min)", "sr", "Spaced Repetition",
+        [`Haz solo las tarjetas pendientes — descansa la mente tras el mock`], ""),
     ]),
     mk("Viernes", [
       t(
-        `Análisis final: score estimado realista (30 min)`,
+        `Análisis final: score estimado realista (40 min)`,
         "review", "Evaluación honesta — sin exagerar ni minimizar",
         [
           `Calcula el score por sección con la escala oficial CAE`,
-          `Compara con el mock de la semana 13 — ¿cuánto subiste?`,
+          `Compara con los mocks anteriores — ¿cuánto subiste?`,
           `¿Estás en 180+ en todas? Si no, ¿cuál sección necesita más trabajo?`,
         ],
         `💬 Claude: "Help me interpret my CAE mock results. My scores by section: [lista]. Is this sufficient to pass C1 Advanced? What are my highest-risk sections and what should I prioritize?"`
       ),
       t(
-        `Speaking: Conversación libre relajada (20 min)`,
+        `Speaking: Conversación libre relajada (25 min)`,
         "speaking", "Fluency + confianza sin presión",
         [
           `Conversación libre con Claude — tema que te interese en inglés`,
@@ -734,354 +992,45 @@ function phase4(w) {
         `💬 Claude: "Let's have a relaxed conversation in English about [tema que quieras]. Don't correct me during the conversation. Afterwards, give me feedback on just the 3 most significant language issues you noticed."`
       ),
       t(
-        `Preparación mental + plan Fase 5 (15 min)`,
-        "review", "Performance psychology",
-        [
-          `Escribe (en inglés) lo que más has mejorado desde la semana 1`,
-          `Define 1 objetivo específico para cada semana de la Fase 5`,
-        ], ""
-      ),
-    ]),
-  ];
-}
-
-function phase5(w) {
-  const wd = WEEK_DATA[w];
-  return [
-    mk("Lunes", [
-      t(
-        `UoE nivel C2: ${wd.grammar} — KWT CPE ×15 (35 min)`,
-        "uoe", "Active Recall C2 — si dominas esto, el CAE es fácil",
-        [
-          `Sesión Claude con foco en "${wd.grammar}" a nivel CPE`,
-          `15 KWT de CPE (Cambridge C2 Proficiency) — son más difíciles que el CAE`,
-          `Cada error → tarjeta SR: añade también las variantes C2`,
-        ],
-        C.grammar(`C2-level ${wd.grammar}`, wd.vocab)
-      ),
-      t(
-        `Writing: Essay académico C2 — "${wd.vocab}" (40 min)`,
-        "writing", "Output complejidad académica — hedging y concesión",
-        [
-          `Essay argumentativo 250-280 palabras con: hedging, nominalization, concession`,
-          `Usa estructuras C2: "It could be argued that…", "Notwithstanding…", "A tendency towards…"`,
-          `Claude corrección: ¿parece un texto académico nativo de C2?`,
-        ],
-        C.writing(`C2 academic essay`, wd.vocab)
-      ),
-      t(
-        `Listening: Lecture CPE — acentos variados (30 min)`,
-        "listening", "Input i+2 — difícil a propósito",
-        [
-          `Busca una lecture/debate de nivel C2 sobre "${wd.vocab}"`,
-          `Escucha sin transcript — anota el argumento principal y 3 ejemplos`,
-          `Compara tus notas con el transcript — ¿cuánto captaste?`,
-        ],
-        C.podcast("Intelligence Squared / TED", `${wd.podcastQ} advanced lecture debate`)
-      ),
-      t(
-        `Speaking: Tema abstracto — "${wd.vocab}" (25 min)`,
-        "speaking", "Output ideas complejas — nivel C2",
-        [
-          `Debate filosófico/abstracto sobre "${wd.vocab}" con Claude`,
-          `Fuerza estructuras C2: hedging, distancing, nominalization`,
-          `Grábate 2 min y escucha: ¿suenas a nivel C2?`,
-        ],
-        `💬 Claude: "Have a sophisticated C2-level discussion with me about '${wd.vocab}'. Challenge my ideas, ask me to justify my positions. After the discussion, identify any language that sounds more B2 than C2 and suggest C2 alternatives."`
-      ),
-      t("SR: Vocabulario C2 — mínimo 10 tarjetas nuevas (10 min)", "sr", "SR intensivo C2",
-        [`Añade 10 expresiones/estructuras C2 aprendidas hoy`], ""),
-    ]),
-    mk("Martes", [
-      t(
-        `Reading: Textos literarios/académicos CPE (40 min)`,
-        "reading", "Input C2 — matices, tono y registro",
-        [
-          `Lee 1 texto literario o académico de nivel C2 sobre "${wd.vocab}"`,
-          `Foco en: tono (formal/irónico/argumentativo), register, implicit meaning`,
-          `Extrae 10 expresiones → Log de Lectura → botón "→ SR"`,
-        ],
-        C.google(`CPE reading text ${wd.vocab} formal academic English C2`)
-      ),
-      t(
-        `UoE: Word formation C2 + open cloze CPE (30 min)`,
-        "uoe", "Interleaving C2 — máxima dificultad",
-        [
-          `Word formation CPE level: palabras de registro formal/académico`,
-          `Open cloze CPE: gaps más ambiguos que en CAE`,
-          `Errors → Banco de Errores + tarjeta SR con explicación de registro`,
-        ],
-        C.google(`CPE Use of English Part 1 Part 2 practice test PDF`)
-      ),
-      t(
-        `Grammar C2: ${wd.grammar} — en producción escrita (25 min)`,
-        "uoe", "Explicit → producción inmediata",
-        [
-          `5 oraciones con "${wd.grammar}" en un contexto académico real`,
-          `Integra en un párrafo coherente (no frases sueltas)`,
-          `Claude evalúa: ¿suena nativo C2 o forzado?`,
-        ],
-        `💬 Claude: "I'm practicing C2 grammar: '${wd.grammar}'. I'll write a short paragraph (5-6 sentences) on '${wd.vocab}' using this structure. Evaluate: does it sound like natural C2 academic English? What would a native C2 speaker do differently?"`
-      ),
-      t(
-        `Shadowing: Academic lecture 15 min (20 min)`,
-        "listening", "Shadowing C2 — velocidad y precisión",
-        [
-          `Lecture académica en inglés sobre "${wd.vocab}"`,
-          `Shadowing a velocidad normal — sin reducir la velocidad`,
-          `Foco: pronunciación de términos técnicos`,
-        ],
-        C.shadow(`${wd.vocab} academic lecture Oxford Cambridge OR TED`)
-      ),
-      t("SR: Collocations C2 del tema (10 min)", "sr", "SR C2",
-        [`Añade collocations académicas/formales encontradas hoy`], ""),
-    ]),
-    mk("Miércoles", [
-      t(
-        `Writing CPE: Summary writing — "${wd.vocab}" (45 min)`,
-        "writing", "Output C2 — comprimir y reformular",
-        [
-          `Lee 2 textos C2 sobre "${wd.vocab}" — resúmelos en 120-150 palabras`,
-          `Integra puntos de ambos textos sin copiar las frases originales`,
-          `Reformula en tu propio vocabulario académico`,
-        ],
-        C.writing(`CPE summary writing task`, wd.vocab)
-      ),
-      t(
-        `UoE: KWT CPE ×12 — las más difíciles (30 min)`,
-        "uoe", "Si dominas esto, el CAE es sencillo",
-        [
-          `12 KWT de CPE — busca específicamente las que implican inversión o concesión`,
-          `Sin ayuda — cronometrado`,
-          `Verifica: los patrones CAE que dominabas, ¿siguen siendo fáciles?`,
-        ],
-        C.google(`CPE key word transformation practice exercises C2 PDF`)
-      ),
-      t(
-        `Speaking: Monólogo académico 5 min grabado (25 min)`,
-        "speaking", "Coherencia extendida — nivel C2",
-        [
-          `5 min de monólogo sin parar sobre un tema de "${wd.vocab}"`,
-          `Estructura: introduce → develop → exemplify → evaluate → conclude`,
-          `Escúchate: ¿hay un hilo argumental claro? ¿cambias de tema abruptamente?`,
-        ],
-        `💬 Claude: "Give me a C2 speaking task: an extended monologue (5 minutes) on '${wd.vocab}'. I'll write my response as if I'm speaking. Evaluate: coherence, argument development, vocabulary range, and whether it sounds C2 or C1."`
-      ),
-      t("SR: Errores UoE persistentes (10 min)", "sr", "Targeted SR — patrones que siguen fallando",
-        [`Foco en tarjetas con calificación ≤3 repetida`], ""),
-    ]),
-    mk("Jueves", [
-      t(
-        `Reading CPE: Gapped text + cross-referencing (40 min)`,
-        "reading", "Razonamiento textual complejo",
-        [
-          `CPE Reading Part 2 (gapped text) — el más difícil del examen`,
-          `Técnica: busca referencia cohesiva (pronombres, lexical chains) antes de elegir`,
-          `Score y análisis: ¿fallaste por vocab o por coherencia?`,
-        ],
-        C.google(`CPE Reading Part 2 gapped text practice test PDF`)
-      ),
-      t(
-        `Speaking: Debate filosófico 20 min — "${wd.vocab}" (30 min)`,
-        "speaking", "Argumentación sofisticada C2",
-        [
-          `Debate con Claude sobre una pregunta abstracta relacionada con "${wd.vocab}"`,
-          `Usa: hedging, concession, reformulation, distancing language`,
-          `¿Cuántas veces dijiste "I think"? → reemplaza con más sofisticado`,
-        ],
-        `💬 Claude: "Debate with me the question: 'Is [abstract question about ${wd.vocab}]?' Push back on my arguments. After 8 exchanges, list all the hedging and distancing phrases I used, and suggest 5 more sophisticated alternatives I could have used."`
-      ),
-      t(
-        `UoE: Banco errores completo — retest nivel C2 (25 min)`,
-        "uoe", "Active Recall total",
-        [
-          `Retest de todos los errores pendientes del Banco de Errores`,
-          `¿Cuántos siguen fallando vs la semana anterior? Mide progreso`,
-        ], ""
-      ),
-      t("SR: Backlog — tarjetas acumuladas (10 min)", "sr", "Consolidación",
-        [`Haz el backlog completo — no te saltes tarjetas`], ""),
-    ]),
-    mk("Sábado", [
-      t(
-        `Reading + UoE nivel CPE — análisis profundo (1.5h)`,
-        "review", "Overtraining — absorber el nivel C2",
-        [
-          `1 test completo de CPE Reading + CPE UoE — timing oficial`,
-          `Análisis exhaustivo: cada error con explicación en Claude`,
-          `Identifica: ¿qué del CPE ya dominas que también aparece en el CAE?`,
-        ],
-        C.google(`Cambridge C2 Proficiency CPE full practice test 2024 PDF`)
-      ),
-      t(
-        `Crear tarjetas SR de todo lo aprendido esta semana (30 min)`,
-        "sr", "Input C2 → SR — consolidar el overtraining",
-        [
-          `Revisa el Log de Lectura y el Banco de Errores de la semana`,
-          `Crea tarjetas SR de las 10 expresiones C2 más útiles`,
-          `Estas tarjetas te seguirán apareciendo hasta el examen`,
-        ], ""
-      ),
-    ]),
-  ];
-}
-
-function phase6(w) {
-  const wd = WEEK_DATA[w];
-  return [
-    mk("Lunes", [
-      t(
-        `Full CAE mock mentalidad 200+ cronometrado (2.5h)`,
-        "review", "CAE se siente más fácil post-C2",
-        [
-          `Mock completo: Reading + UoE + Writing + Listening — timing oficial`,
-          `Mentalidad: "Esto es fácil comparado con el CPE que hice la semana pasada"`,
-          `Score estimado: ¿llegaste a 193+? ¿200?`,
-        ],
-        C.google(`CAE C1 Advanced full mock test 2025 PDF with answers`)
-      ),
-      t(
-        `Análisis: compara con mock de Fase 4 (30 min)`,
-        "review", "Medir el efecto del overtraining C2",
-        [
-          `Score Fase 4 mock vs score hoy — ¿cuánto subiste gracias al CPE?`,
-          `¿Qué sección mejoró más? ¿Cuál quedó igual?`,
-          `Claude: analiza los errores restantes — ¿son evitables o de conocimiento?`,
-        ],
-        `💬 Claude: "Compare these two CAE mock results: Fase 4: [scores], Fase 6: [scores]. What improved? What still needs work? What are the most common remaining error types and how do I eliminate them in the next 2 weeks?"`
-      ),
-    ]),
-    mk("Martes", [
-      t(
-        `UoE CAE Parts 1-4 — apunta a 0-2 errores (40 min)`,
-        "uoe", "Los patrones CAE ya los conoces — demuéstralo",
-        [
-          `CAE UoE parts 1-4 cronometrado sin ayuda`,
-          `Con tus habilidades C2, esto debería sentirse manejable`,
-          `Cualquier error > analiza si es descuido o zona débil real`,
-        ],
-        C.google(`CAE Use of English Parts 1-4 practice 2025`)
-      ),
-      t(
-        `Writing CAE: 2 tasks — aplica complejidad C2 (50 min)`,
-        "writing", "Estructuras C2 en formato C1 — diferenciador clave",
-        [
-          `Essay + 1 Part 2 — usa nominalization, hedging, inversión donde corresponda`,
-          `Evaluación Claude: ¿el lenguaje es claramente superior a C1 básico?`,
-          `¿Cumples los criterios CAE sin perder el registro correcto?`,
-        ],
-        C.writing(`CAE Writing applying C2 language level`, wd.vocab)
-      ),
-      t(
-        `Speaking: Mock Speaking CAE grabado (25 min)`,
-        "speaking", "Vocabulario C2 en formato C1",
-        [
-          `Mock completo 4 partes — escribe o graba`,
-          `¿Tu vocabulario es notablemente más rico que hace 2 meses?`,
-          `Foco: dar respuestas que suenen naturalmente avanzadas`,
-        ],
-        `💬 Claude: "Run a full CAE Speaking exam simulation (Parts 1-4). After my responses, compare my vocabulary and grammar level to what you'd expect from C1 Basic vs C2. Am I using the C2 skills I've developed?"`
-      ),
-      t("SR: Tarjetas que aún fallas (10 min)", "sr", "SR selectivo final",
-        [`Solo tarjetas con calificación ≤3 — las que quedan pendientes`], ""),
-    ]),
-    mk("Miércoles", [
-      t(
-        `Listening: Full CAE test — debería sentirse cómodo (40 min)`,
-        "listening", "Post-CPE el CAE Listening es más relajado",
-        [
-          `CAE Listening parts 1-4 — timer oficial`,
-          `¿La velocidad te parece lenta comparado con el CPE? Bien, así debe sentirse`,
-          `Score: si < 85%, revisa qué parte específica falla`,
-        ],
-        C.google(`CAE Listening full test audio 2025 youtube OR cambridgeenglish.org`)
-      ),
-      t(
-        `Reading: Full CAE Reading — velocidad + precisión (35 min)`,
-        "reading", "Time management perfecto",
-        [
-          `CAE Reading parts 1-4 — timing estricto por parte`,
-          `P1 (8 min), P2 (9 min), P3 (15 min), P4 (13 min)`,
-          `¿Terminaste en tiempo? Velocidad de lectura C2 > C1`,
-        ],
-        C.google(`CAE Reading Parts 1-4 practice test 2025 PDF`)
-      ),
-      t(
-        `UoE: Banco errores completo — retest TODO (30 min)`,
-        "uoe", "Zero errors — eliminar los últimos patrones débiles",
-        [
-          `Todos los errores pendientes del banco — retest cronometrado`,
-          `¿Cuántos quedan "sin dominar"? Esos son tu foco para el examen`,
-        ], ""
-      ),
-    ]),
-    mk("Jueves", [
-      t(
-        `FULL CAE MOCK — completo sin interrupciones (2.5h)`,
-        "review", "Mide tu score real con nivel C2",
-        [
-          `Condiciones de examen perfectas — silencio, timer, sin ayuda`,
-          `Esta es tu predicción más realista del score del 26 sept`,
-          `Anota scores por sección`,
-        ],
-        C.google(`CAE Cambridge C1 Advanced full mock exam with answers 2025`)
-      ),
-    ]),
-    mk("Viernes", [
-      t(
-        `Análisis mock del jueves — score por sección (40 min)`,
-        "review", "¿193+? ¿200? Evalúa honestamente",
-        [
-          `Score oficial estimado por sección`,
-          `Compara con todos los mocks anteriores — curva de progreso`,
-          `Registra en el Score Tracker de la app`,
-        ],
-        `💬 Claude: "My final pre-exam mock scores: [lista por sección]. What is my predicted CAE grade (A/B/C/fail)? What are the 3 highest-impact improvements I can still make this week?"`
-      ),
-      t(
-        `Writing: Reescribir peor task al máximo (25 min)`,
+        `Writing: Reescribe tu peor task al máximo nivel (30 min)`,
         "writing", "Elevar el floor — que todo sea bueno",
         [
           `Coge el writing con peor score de los mocks`,
-          `Reescríbelo aplicando todo lo que sabes de C2`,
-          `¿Subió el score? Eso es lo que puedes hacer el día del examen`,
+          `Reescríbelo aplicando todo lo que sabes — ¿subió el score?`,
         ],
         C.writing(`CAE writing rewrite to maximum level`, wd.vocab)
       ),
       t(
-        `Comparar mocks Fase 4 vs Fase 6 (15 min)`,
-        "review", "Cuantificar la mejora del overtraining",
+        `Preparación mental + plan de la última fase (25 min)`,
+        "review", "Performance psychology",
         [
-          `Semana 20 vs semana actual — ¿cuánto subiste?`,
-          `El overtraining C2 funcionó: ¿cómo de fácil se siente el CAE ahora?`,
+          `Escribe (en inglés) lo que más has mejorado desde la semana 1`,
+          `Define el foco de la última fase antes del examen`,
         ], ""
       ),
     ]),
     mk("Sábado", [
       t(
-        `Mock CAE #2 de la semana (2h)`,
-        "review", "2 mocks por semana estas últimas 2 semanas",
+        `FULL MOCK #2 de la semana — test distinto (90 min)`,
+        "review", "Dress rehearsal — el ensayo más cercano al examen real",
         [
-          `Segundo mock completo — usa un test diferente al del jueves`,
-          `Foco: consistency — ¿mantienes el mismo nivel en los 2 mocks?`,
-          `Si hay diferencia grande, identifica qué varió (cansancio, tema, timing)`,
+          `Examen completo con un test diferente al del jueves — timing oficial`,
+          `Silencio, sin teléfono, sin ayuda — como el día del examen`,
+          `Anota score por sección`,
         ],
-        C.google(`CAE C1 Advanced official past papers 2023 2024 PDF`)
+        C.google(`CAE C1 Advanced official past papers full exam PDF`)
       ),
       t(
         `Análisis + ajuste final (30 min)`,
-        "review", "Error Analysis — últimos ajustes",
-        [
-          `Los 3 errores más repetidos de ambos mocks → sesión Claude`,
-          `Plan concreto para la última semana de intensidad`,
-        ],
-        `💬 Claude: "These are the errors I keep making in my CAE mocks: [lista]. With only [días] days left, what is the single most impactful thing to practice? Give me a 3-day mini plan."`
+        "review", "Error Analysis — últimos retoques",
+        [`Los 3 errores más repetidos de ambos mocks → mini-plan con Claude`],
+        `💬 Claude: "These are the errors I keep making in my CAE mocks: [lista]. With only [días] days left, what is the single most impactful thing to practice this week?"`
       ),
     ]),
   ];
 }
 
-function phase7() {
+function phase5() {
   return [
     mk("Lunes", [
       t(
@@ -1114,7 +1063,7 @@ function phase7() {
           `Cualquier podcast que disfrutes — no hay tarea de analysis`,
           `Solo escucha y disfruta`,
         ],
-        `🎧 Elige el podcast que más hayas disfrutado durante las 27 semanas`
+        `🎧 Elige el podcast que más hayas disfrutado durante el plan`
       ),
     ]),
     mk("Miércoles", [
@@ -1188,7 +1137,7 @@ export function daysUntilExam() {
 export function defaultState() {
   return {
     scores: SKILLS.reduce((a, s) => ({
-      ...a, [s.key]: [{ week: 0, score: s.current, date: "23/3/2026" }]
+      ...a, [s.key]: [{ week: 0, score: s.current, date: "15/6/2026" }]
     }), {}),
     dailyChecks: {},
     errors: [],
@@ -1204,11 +1153,9 @@ export function defaultState() {
 }
 
 export function getWeekPlan(w) {
-  if (w <= 6)  return phase1(w);
-  if (w <= 12) return phase2(w);
-  if (w <= 16) return phase3(w);
-  if (w <= 20) return phase4(w);
-  if (w <= 24) return phase5(w);
-  if (w <= 26) return phase6(w);
-  return phase7();
+  if (w <= 4)  return phase1(w);   // F1 · Cerrar brechas
+  if (w <= 8)  return phase2(w);   // F2 · Subir a C1
+  if (w <= 11) return phase3(w);   // F3 · Consolidar C1
+  if (w <= 14) return phase4(w);   // F4 · Dominar C1
+  return phase5();                 // F5 · Tapering (semana 15)
 }
